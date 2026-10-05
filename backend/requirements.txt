@@ -1,0 +1,13 @@
+falkordb>=1.0.12
+fastapi>=0.115.0
+uvicorn[standard]>=0.32.0
+pydantic>=2.9.2
+pydantic-settings>=2.6.0
+google-genai>=0.1.1
+litellm>=1.52.0
+python-dotenv>=1.0.1
+websockets>=13.1
+redis>=5.2.0
+httpx>=0.28.0
+pytest>=8.3.0
+pytest-asyncio>=0.24.0
