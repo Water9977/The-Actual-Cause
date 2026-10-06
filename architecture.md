@@ -186,10 +186,11 @@ Implemented in [backend/main.py](file:///e:/Antigravity/Workspaces/Graph%20Hacks
 
 ## 8. Directory & File Manifest
 
-* [`architecture.md`](file:///e:/Antigravity/Workspaces/Graph%20Hacks/architecture.md) — Ground-truth system specification.
-* [`to-do.md`](file:///e:/Antigravity/Workspaces/Graph%20Hacks/to-do.md) — Real-time task tracker.
-* [`INCIDENT_RESEARCH_DOSSIER.md`](file:///e:/Antigravity/Workspaces/Graph%20Hacks/INCIDENT_RESEARCH_DOSSIER.md) — Comprehensive SRE research dossier.
-* [`backend/`](file:///e:/Antigravity/Workspaces/Graph%20Hacks/backend/) — Python FastAPI backend.
+* [`architecture.md`](file:///e:/Antigravity/Workspaces/Graph%20Hacks/architecture.md): Ground-truth system specification.
+* [`DESIGN.md`](file:///e:/Antigravity/Workspaces/Graph%20Hacks/DESIGN.md): Visual design system, HUD tokens, and layout specification.
+* [`to-do.md`](file:///e:/Antigravity/Workspaces/Graph%20Hacks/to-do.md): Real-time task tracker.
+* [`INCIDENT_RESEARCH_DOSSIER.md`](file:///e:/Antigravity/Workspaces/Graph%20Hacks/INCIDENT_RESEARCH_DOSSIER.md): Comprehensive SRE research dossier.
+* [`backend/`](file:///e:/Antigravity/Workspaces/Graph%20Hacks/backend/): Python FastAPI backend.
   * [`requirements.txt`](file:///e:/Antigravity/Workspaces/Graph%20Hacks/backend/requirements.txt)
   * [`.env.example`](file:///e:/Antigravity/Workspaces/Graph%20Hacks/backend/.env.example)
   * [`config.py`](file:///e:/Antigravity/Workspaces/Graph%20Hacks/backend/config.py)
@@ -203,4 +204,4 @@ Implemented in [backend/main.py](file:///e:/Antigravity/Workspaces/Graph%20Hacks
   * [`agents/incident_agent.py`](file:///e:/Antigravity/Workspaces/Graph%20Hacks/backend/agents/incident_agent.py)
   * [`tools/cypher_runner.py`](file:///e:/Antigravity/Workspaces/Graph%20Hacks/backend/tools/cypher_runner.py)
   * [`tools/algo_runner.py`](file:///e:/Antigravity/Workspaces/Graph%20Hacks/backend/tools/algo_runner.py)
-* [`frontend/`](file:///e:/Antigravity/Workspaces/Graph%20Hacks/frontend/) — Next.js 15 frontend application.
+* [`frontend/`](file:///e:/Antigravity/Workspaces/Graph%20Hacks/frontend/): Next.js 15 frontend application.
