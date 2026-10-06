@@ -1,4 +1,4 @@
-# 🧠 SYNAPSE-OS: SYSTEM ARCHITECTURE SPECIFICATION
+# SYNAPSE-OS: SYSTEM ARCHITECTURE SPECIFICATION
 **Project**: SYNAPSE-OS (Autonomous Incident Triage & SRE Graph Memory)  
 **Hackathon Target**: Graph Hacks 2026 by WeMakeDevs & FalkorDB  
 **Target Tracks**: 
@@ -63,31 +63,31 @@ SYNAPSE-OS unifies telemetry, Git history, system architecture, and incident pos
 Complete schema reference implemented in [backend/database/schema.py](file:///e:/Antigravity/Workspaces/Graph%20Hacks/backend/database/schema.py) and populated by [backend/database/seed_data.py](file:///e:/Antigravity/Workspaces/Graph%20Hacks/backend/database/seed_data.py).
 
 ### 3.1 Node Specifications
-- `:Service` — Logical microservice/API boundary (`id`, `name`, `tier`, `repo_url`, `language`, `slo_target`, `systemic_fragility_index`).
-- `:Infrastructure` — Physical or cloud resource (`id`, `name`, `type` [RDS, Redis, Kafka, Pod], `region`, `capacity_limit`).
-- `:Alert` — Telemetry breach from observability (`id`, `name`, `severity` [P0..P4], `metric_name`, `threshold`, `observed_value`, `status`).
-- `:Incident` — Declared operational outage (`id`, `title`, `severity`, `status` [TRIAGING, MITIGATED, RESOLVED], `started_at`).
-- `:Commit` — Atomic Git commit (`hash`, `message`, `timestamp`, `lines_added`, `lines_deleted`, `changed_files`).
-- `:PullRequest` — Merged PR (`number`, `title`, `repo`, `merged_at`, `diff_url`, `ast_change_summary`).
-- `:Person` — Engineer or team member (`id`, `email`, `name`, `role`, `pagerduty_id`, `slack_handle`).
-- `:Team` — Squad owning services (`id`, `name`, `slack_channel`, `oncall_rotation_id`).
-- `:Decision` — Architectural decision or RFC (`id`, `rfc_number`, `title`, `status`, `rationale`).
-- `:PostMortem` — Retrospective analysis (`id`, `incident_id`, `timeline_summary`, `lessons_learned`).
-- `:Playbook` — Executable mitigation runbook (`id`, `title`, `target_service`, `automated_remediation_script`).
+- `:Service`: Logical microservice/API boundary (`id`, `name`, `tier`, `repo_url`, `language`, `slo_target`, `systemic_fragility_index`).
+- `:Infrastructure`: Physical or cloud resource (`id`, `name`, `type` [RDS, Redis, Kafka, Pod], `region`, `capacity_limit`).
+- `:Alert`: Telemetry breach from observability (`id`, `name`, `severity` [P0..P4], `metric_name`, `threshold`, `observed_value`, `status`).
+- `:Incident`: Declared operational outage (`id`, `title`, `severity`, `status` [TRIAGING, MITIGATED, RESOLVED], `started_at`).
+- `:Commit`: Atomic Git commit (`hash`, `message`, `timestamp`, `lines_added`, `lines_deleted`, `changed_files`).
+- `:PullRequest`: Merged PR (`number`, `title`, `repo`, `merged_at`, `diff_url`, `ast_change_summary`).
+- `:Person`: Engineer or team member (`id`, `email`, `name`, `role`, `pagerduty_id`, `slack_handle`).
+- `:Team`: Squad owning services (`id`, `name`, `slack_channel`, `oncall_rotation_id`).
+- `:Decision`: Architectural decision or RFC (`id`, `rfc_number`, `title`, `status`, `rationale`).
+- `:PostMortem`: Retrospective analysis (`id`, `incident_id`, `timeline_summary`, `lessons_learned`).
+- `:Playbook`: Executable mitigation runbook (`id`, `title`, `target_service`, `automated_remediation_script`).
 
 ### 3.2 Directed Edge Specifications
-- `(:Service)-[:CALLS]->(:Service)` — Synchronous/asynchronous RPC invocation (`protocol`, `timeout_ms`).
-- `(:Service)-[:DEPENDS_ON]->(:Infrastructure)` — Cloud resource dependency (`pool_size`, `max_connections`).
-- `(:Service)-[:DEPLOYED_FROM]->(:Commit)` — Currently running production version.
-- `(:Alert)-[:FIRED_ON]->(:Service|:Infrastructure)` — Entity where anomaly was observed.
-- `(:Incident)-[:TRIGGERED_BY]->(:Alert)` — Primary alert triggering the incident.
-- `(:Commit)-[:PART_OF]->(:PullRequest)` — Commit to PR relationship.
-- `(:PullRequest)-[:AUTHORED_BY]->(:Person)` — Authorship attribution.
-- `(:PullRequest)-[:IMPLEMENTS]->(:Decision)` — Traceability back to approved RFC.
-- `(:Team)-[:OWNS]->(:Service)` — Service ownership and accountability.
-- `(:Person)-[:MEMBER_OF]->(:Team)` — Team membership.
-- `(:Incident)-[:ROOT_CAUSED_BY]->(:Commit|:Infrastructure)` — Confirmed root-cause edge.
-- `(:Playbook)-[:REMEDIES]->(:Service|:Infrastructure)` — Validated mitigation procedure.
+- `(:Service)-[:CALLS]->(:Service)`: Synchronous/asynchronous RPC invocation (`protocol`, `timeout_ms`).
+- `(:Service)-[:DEPENDS_ON]->(:Infrastructure)`: Cloud resource dependency (`pool_size`, `max_connections`).
+- `(:Service)-[:DEPLOYED_FROM]->(:Commit)`: Currently running production version.
+- `(:Alert)-[:FIRED_ON]->(:Service|:Infrastructure)`: Entity where anomaly was observed.
+- `(:Incident)-[:TRIGGERED_BY]->(:Alert)`: Primary alert triggering the incident.
+- `(:Commit)-[:PART_OF]->(:PullRequest)`: Commit to PR relationship.
+- `(:PullRequest)-[:AUTHORED_BY]->(:Person)`: Authorship attribution.
+- `(:PullRequest)-[:IMPLEMENTS]->(:Decision)`: Traceability back to approved RFC.
+- `(:Team)-[:OWNS]->(:Service)`: Service ownership and accountability.
+- `(:Person)-[:MEMBER_OF]->(:Team)`: Team membership.
+- `(:Incident)-[:ROOT_CAUSED_BY]->(:Commit|:Infrastructure)`: Confirmed root-cause edge.
+- `(:Playbook)-[:REMEDIES]->(:Service|:Infrastructure)`: Validated mitigation procedure.
 
 ### 3.3 Multi-Graph Isolation
 - **Master Graph (`enterprise_master`)**: Read-only canonical source of truth for runtime topology and team context.
@@ -100,7 +100,7 @@ Complete schema reference implemented in [backend/database/schema.py](file:///e:
 Implemented in [backend/agents/](file:///e:/Antigravity/Workspaces/Graph%20Hacks/backend/agents/).
 
 ### 4.1 Swarm LLM Engine & Architecture
-* **Primary LLM**: Google DeepMind **Gemini 3.8 Flash** (`gemini-3.8-flash` via official `google-genai` SDK) — specialized for agentic workflows, long-horizon multi-step reasoning, and sub-second token latency.
+* **Primary LLM**: Google DeepMind **Gemini 3.8 Flash** (`gemini-3.8-flash` via official `google-genai` SDK): specialized for agentic workflows, long-horizon multi-step reasoning, and sub-second token latency.
 * **Inference Mode**: **Pure Live LLM Inference** (Zero pre-computed mock responses; real-time generation of agent thoughts, Cypher queries, and execution streaming).
 * **Telemetry Channel**: Real-time WebSocket stream (`/ws/telemetry`) streaming thoughts, latency metrics, and 3D graph highlights to the Next.js HUD.
 
@@ -172,11 +172,11 @@ To avoid SSR hydration mismatches in Next.js, the 3D canvas is isolated via clie
 Implemented in [backend/main.py](file:///e:/Antigravity/Workspaces/Graph%20Hacks/backend/main.py).
 
 ### 7.1 Endpoints
-* `GET /api/health` — Checks FalkorDB connection status and server health.
-* `GET /api/graph/master` — Exports full node and edge topology for frontend 3D canvas initialization.
-* `POST /api/incident/simulate` — Triggers the Golden Demo ("The Silent Poison Migration") simulated outage.
-* `POST /api/incident/remediate` — Executes the 1-click playbook command.
-* `WS /ws/telemetry` — Bidirectional real-time stream emitting:
+* `GET /api/health`: Checks FalkorDB connection status and server health.
+* `GET /api/graph/master`: Exports full node and edge topology for frontend 3D canvas initialization.
+* `POST /api/incident/simulate`: Triggers the Golden Demo ("The Silent Poison Migration") simulated outage.
+* `POST /api/incident/remediate`: Executes the 1-click playbook command.
+* `WS /ws/telemetry`: Bidirectional real-time stream emitting:
   - `AGENT_THOUGHT`: Sub-goal analysis.
   - `CYPHER_EXEC`: Query text + execution latency in milliseconds.
   - `GRAPH_HIGHLIGHT`: Node/edge IDs for 3D camera tracking and particle activation.

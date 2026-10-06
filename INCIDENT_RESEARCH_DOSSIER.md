@@ -1,4 +1,4 @@
-# 📑 INCIDENT RESEARCH DOSSIER: AUTONOMOUS INCIDENT TRIAGE, CASCADING FAILURES, AND GRAPH-BASED SRE MEMORY
+# INCIDENT RESEARCH DOSSIER: AUTONOMOUS INCIDENT TRIAGE, CASCADING FAILURES, AND GRAPH-BASED SRE MEMORY
 
 **Project**: SYNAPSE-OS (Autonomous Living Enterprise Brain)  
 **Hackathon Target**: Graph Hacks 2026 (WeMakeDevs & FalkorDB)  
@@ -40,7 +40,7 @@ Across communities in `r/devops`, `r/ExperiencedDevs`, `r/sysadmin`, and Hacker 
 #### 1. Neurobiology and Sleep Inertia Under Severe Pressure
 When awakened from slow-wave or REM sleep by a high-priority PagerDuty siren, the human brain suffers from acute **sleep inertia**. Motor skills and working memory are impaired for 15 to 30 minutes. Responders describe "tunnel vision" and terminal blindness:
 > *"At 3 AM your brain does not work. You stare at terminal output you've looked at 1,000 times, and the characters don't form words. Your hands are literally shaking from the adrenaline spike, and your heart is pounding against your ribs while you try to remember your password."*  
-> — Senior SRE (`r/ExperiencedDevs`)
+> Senior SRE (`r/ExperiencedDevs`)
 
 #### 2. The Multi-Factor Authentication Obstacle Course
 Before an engineer can inspect a single span or tail a log:
@@ -97,17 +97,17 @@ Tribal knowledge is operational context that lives exclusively inside the heads 
 ```
 
 #### Raw Quotes from Senior Engineers
-> *"Tribal knowledge is technical debt masquerading as job security. When an organization praises the senior engineer who woke up at 3 AM and fixed the cluster with three secret bash commands, they aren't rewarding excellence—they are celebrating systemic failure. That engineer isn't an asset; they are a catastrophic single point of failure held together by adrenaline."*  
-> — Senior SRE, Hacker News
+> *"Tribal knowledge is technical debt masquerading as job security. When an organization praises the senior engineer who woke up at 3 AM and fixed the cluster with three secret bash commands, they aren't rewarding excellence, they are celebrating systemic failure. That engineer isn't an asset; they are a catastrophic single point of failure held together by adrenaline."*  
+> Senior SRE, Hacker News
 
 > *"Runbooks in high-growth companies are almost worse than no runbooks at all. A missing runbook forces you to inspect first principles. An outdated runbook gives you false confidence: it tells you to execute a script that dropped a replica in 2022, but in 2024 it corrupts the Raft state across the entire cluster. Stale tribal documentation is an active landmine."*  
-> — Staff Infrastructure Engineer (`r/devops`)
+> Staff Infrastructure Engineer (`r/devops`)
 
 > *"Every company has a 'Bob'. Bob knows that Service A only talks to Service B if you set this obscure environment variable, and that the Redis cache must be warmed before starting the worker nodes or the DB dies. When Bob goes on vacation to Patagonia or quits for a doubling salary at Stripe, the company enters an operational dark age. The first outage after Bob leaves is always an unmitigated disaster because everyone realizes the system's architecture lived entirely in Bob's skull."*  
-> — Principal Architect (`r/ExperiencedDevs`)
+> Principal Architect (`r/ExperiencedDevs`)
 
 > *"When only the tribal elders understand how the failover script actually works, on-call responders freeze. They see the database drowning, they know there's a failover button, but they won't touch it because they don't know what side effects it triggers. They spend 45 minutes trying to wake up someone senior on Slack while the entire company bleeds revenue. Tribal knowledge breeds a culture of operational terror."*  
-> — SRE Lead, Hacker News
+> SRE Lead, Hacker News
 
 ---
 
@@ -131,7 +131,7 @@ Action items derived from postmortems (*"Implement exponential backoff with jitt
 As pioneered by safety scientists Dr. Richard Cook (*"How Complex Systems Fail"*) and John Allspaw:
 - Postmortems often engage in "compliance theater" to satisfy SOC2, ISO27001, or enterprise customer SLA requirements demanding an "RCA within 72 hours."
 - Teams hunt for a comforting, singular "Root Cause" (*"Engineer deployed typo," "Bad regex"*).
-- By pinning the failure on a single component or human action, the organization ignores the **latent systemic conditions**—the lack of canary isolation, the lack of CPU execution boundaries, and the presence of tight cross-service coupling.
+- By pinning the failure on a single component or human action, the organization ignores the **latent systemic conditions**: the lack of canary isolation, the lack of CPU execution boundaries, and the presence of tight cross-service coupling.
 
 ---
 
@@ -210,7 +210,7 @@ Many recent AI incident tools attempt to solve post-outage triage by chunking ru
 - **Underlying Engine**: Proprietary columnar and time-series stores (Husky, Hummingbird).
 - **Where It Hits the Wall**: Datadog excels at metric aggregation and APM span visualization. However:
   1. **Empirical Service Maps**: Its service dependency map is inferred dynamically from sampled distributed traces. If a service experiences a hard timeout or network partition, spans are dropped, and the service map breaks exactly when it is needed most.
-  2. **No Code/Social Graph**: Deploy tracking consists of "deploy markers"—a vertical line drawn on a time-series chart. Datadog cannot parse git AST diffs, cannot trace which code branch modified an environment variable, and cannot identify the PR author.
+  2. **No Code/Social Graph**: Deploy tracking consists of "deploy markers" (a vertical line drawn on a time-series chart). Datadog cannot parse git AST diffs, cannot trace which code branch modified an environment variable, and cannot identify the PR author.
   3. **Temporal Anomaly Clustering**: Its Watchdog AI groups alerts based on time proximity. When 50 services fail within 60 seconds, it dumps all 50 into a single "incident," leaving root-cause attribution to human intuition.
 
 #### 3. Dynatrace (Davis AI)
@@ -553,7 +553,7 @@ LIMIT 5;
 
 ### 6.2 Time-Decayed PageRank on Git Authorship: Genuine SME Discovery
 
-Static on-call schedules page whoever happens to be scheduled on the rotation—frequently an engineer with zero context on the failing subsystem.
+Static on-call schedules page whoever happens to be scheduled on the rotation: frequently an engineer with zero context on the failing subsystem.
 
 SYNAPSE-OS constructs an Authorship Graph where edge weights between an engineer and a code artifact decay exponentially over time:
 $$W(e, c) = (\text{lines\_added} + \text{lines\_deleted}) \cdot e^{-\lambda (T_{\text{incident}} - T_{\text{commit}})}$$
@@ -714,7 +714,7 @@ This scripted scenario is engineered specifically to demonstrate FalkorDB's supe
 - **Time**: 02:45 AM.
 - **Surface Symptom**: PagerDuty fires a P0 alert: `CheckoutService P99 Latency > 15,000ms, Error Rate > 42% (HTTP 504 Gateway Timeout)`.
 - **The Misdirection**: The junior on-call engineer checks Datadog. Datadog shows `CheckoutService` pods running out of memory. The standard incident tool suggests: *"Restart CheckoutService pods."*
-- **The Catastrophe**: The engineer restarts the pods. The pods immediately crash loop again because the problem is not in `CheckoutService`—it is 3 hops away in an upstream shared cache that exhausted its memory, causing synchronous database query pile-ups.
+- **The Catastrophe**: The engineer restarts the pods. The pods immediately crash loop again because the problem is not in `CheckoutService`: it is 3 hops away in an upstream shared cache that exhausted its memory, causing synchronous database query pile-ups.
 
 ---
 
@@ -814,4 +814,4 @@ By combining:
 3. **Multi-Graph Isolation** for hallucination-free concurrent agent deliberation, and
 4. **An Anti-Slop 3D Force-Directed HUD** with real-time WebSocket telemetry,
 
-**SYNAPSE-OS** does not merely improve incident response—it fundamentally redefines how distributed software systems understand themselves. It exposes the fatal blind spots of existing billion-dollar monitoring tools and provides an unassailable technical foundation to win **Track 02 (Agent Memory & Coordination)** and **Track 03 (Company Brain)** at Graph Hacks 2026.
+**SYNAPSE-OS** does not merely improve incident response: it fundamentally redefines how distributed software systems understand themselves. It exposes the fatal blind spots of existing billion-dollar monitoring tools and provides an unassailable technical foundation to win **Track 02 (Agent Memory & Coordination)** and **Track 03 (Company Brain)** at Graph Hacks 2026.

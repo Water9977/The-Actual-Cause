@@ -1,4 +1,4 @@
-# 🏆 GRAPH HACKS: COMPLETE HACKATHON DOSSIER & WINNING BLUEPRINT
+# GRAPH HACKS: COMPLETE HACKATHON DOSSIER & WINNING BLUEPRINT
 
 **Hackathon**: Graph Hacks: Context for AI Agents  
 **Organizers**: WeMakeDevs & FalkorDB  
@@ -6,7 +6,7 @@
 **Total Prize Pool**: $20,000+ (High-end hardware + side prizes)  
 **Participant Status**: Solo Competitor  
 **Current Date**: October 5, 2026  
-**Prep Phase Window**: October 5 – October 14, 2026 (~9 Days)  
+**Prep Phase Window**: October 5 to October 14, 2026 (~9 Days)  
 **Active Hackathon Window**: October 15, 12:01 AM IST to October 18, 11:59 PM IST (4 Days / ~96 Hours)  
 
 ---
@@ -15,10 +15,10 @@
 
 The **Graph Hacks** hackathon centers on solving the fundamental flaw in modern autonomous AI agents: **lack of contextual awareness, relationship understanding, and long-term memory.**
 
-Standard LLM agents operate on isolated chunk lookups (flat vector embeddings) or brittle conversational context windows. FalkorDB posits that **graphs are the missing context layer for AI agents**—providing structured relational knowledge, multi-hop reasoning, temporal memory across sessions, and explainable decision trails.
+Standard LLM agents operate on isolated chunk lookups (flat vector embeddings) or brittle conversational context windows. FalkorDB posits that **graphs are the missing context layer for AI agents**, providing structured relational knowledge, multi-hop reasoning, temporal memory across sessions, and explainable decision trails.
 
 ### Registrations & Competitive Landscape
-- **Current Registered**: 2,891+ participants (and climbing toward 5,000–6,000).
+- **Current Registered**: 2,891+ participants (and climbing toward 5,000 to 6,000).
 - **Estimated Active Submissions**: 1,000 to 2,000 developers / teams.
 - **Team Size**: Solo or up to 4 members. We are competing **Solo**.
 - **Your Advantage as a Solo Competitor**: Zero coordination friction, unified vision, 100% ownership, and ability to move at lightspeed with agentic pair programming. Winning a hardware prize solo means **you take home 100% of the prize** (no splitting).
@@ -29,7 +29,7 @@ Standard LLM agents operate on isolated chunk lookups (flat vector embeddings) o
 
 | Phase | Date & Time (IST) | Date & Time (EDT) | Description & Focus |
 |---|---|---|---|
-| **Prep & Ideation** | *Now* – Oct 14, 2026 | *Now* – Oct 14, 2026 | Deep research, architecture design, schema design, dataset curation, prototype scaffolding. |
+| **Prep & Ideation** | *Now* to Oct 14, 2026 | *Now* to Oct 14, 2026 | Deep research, architecture design, schema design, dataset curation, prototype scaffolding. |
 | **Hackathon Kickoff** | Oct 15, 12:01 AM IST | Oct 14, 2:31 PM EDT | Official coding sprint starts. Core FalkorDB implementation begins. |
 | **Midpoint Check** | Oct 16, 2026 | Oct 16, 2026 | Core agent loop & graph traversal functional; live UI prototype connected. |
 | **Feature Freeze & Polish** | Oct 17, 2026 | Oct 17, 2026 | Live deployment, end-to-end testing, error handling, performance benchmarks. |
@@ -39,15 +39,15 @@ Standard LLM agents operate on isolated chunk lookups (flat vector embeddings) o
 
 ## 3. Prizes & Award Structure ($20,000 Total Value)
 
-The prize pool is exceptionally attractive—comprising coveted flagship hardware:
+The prize pool comprises coveted flagship hardware:
 
 | Category / Track | Prize | Description / Awarded To |
 |---|---|---|
-| **Track 01: Agents That Act on Connected Data** | 📱 **iPhone 18 Pro** | Awarded to the best agent that leverages a knowledge graph to make multi-hop decisions and take real-world action. |
-| **Track 02: Agent Memory and Coordination** | 🎮 **PlayStation 5 with GTA VI** | Awarded to the best multi-agent or persistent agent architecture that remembers across sessions and coordinates shared state. |
-| **Track 03: Company Brain** | 🖥️ **M6 Mac Mini** | Awarded to the best enterprise-grade agent that unifies company knowledge (docs, tickets, people, decisions) with clear source attribution. |
-| **Side Prize 01: Best Blog Post** | 🎧 **AirPods 5** *(1 Winner)* | Best written technical breakdown/blog post detailing the project, architecture, and learnings. |
-| **Side Prize 02: Top 50 Submissions** | 👕 **Official Graph Hacks T-Shirt** *(Top 50 Teams)* | Shipped directly to the physical addresses of all top 50 qualifying projects. |
+| **Track 01: Agents That Act on Connected Data** | **iPhone 18 Pro** | Awarded to the best agent that leverages a knowledge graph to make multi-hop decisions and take real-world action. |
+| **Track 02: Agent Memory and Coordination** | **PlayStation 5 with GTA VI** | Awarded to the best multi-agent or persistent agent architecture that remembers across sessions and coordinates shared state. |
+| **Track 03: Company Brain** | **M6 Mac Mini** | Awarded to the best enterprise-grade agent that unifies company knowledge (docs, tickets, people, decisions) with clear source attribution. |
+| **Side Prize 01: Best Blog Post** | **AirPods 5** *(1 Winner)* | Best written technical breakdown/blog post detailing the project, architecture, and learnings. |
+| **Side Prize 02: Top 50 Submissions** | **Official Graph Hacks T-Shirt** *(Top 50 Teams)* | Shipped directly to the physical addresses of all top 50 qualifying projects. |
 
 > **Strategy Note**: Every single submission should also aim for the **Best Blog Post (AirPods 5)** and guarantee placement in the **Top 50 (T-shirt)** as a baseline floor, while targeting 1st place in the chosen Track.
 
