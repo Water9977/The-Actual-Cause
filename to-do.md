@@ -24,6 +24,7 @@ Status Legend:
 * [x] Task 1.9: Initialize master task tracker (to-do.md).
 * [x] Task 1.10: Author exhaustive incident triage, cascading failure, and graph-based SRE memory dossier (INCIDENT_RESEARCH_DOSSIER.md).
 * [x] Task 1.11: Initialize private GitHub repository (Water9977/The-Actual-Cause) and push project baseline.
+* [x] Task 1.12: Check out, install, and integrate Scrapling (stealth browser and adaptive parser) and REA (Reverse Engineer Anything MCP server and CLI) into the workspace.
 
 ---
 
