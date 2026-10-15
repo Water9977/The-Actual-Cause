@@ -55,7 +55,7 @@ Status Legend:
 ---
 
 ### Phase 4: Next.js Frontend Foundation and Anti-Slop Design System
-* [-] Task 4.1: Draft DESIGN.md specifying dark void tokens, Three.js 3D canvas, and HUD layout contracts (under active co-design review).
+* [x] Task 4.1: Finalize DESIGN.md incorporating TypeUI token standards, Taste Skill brief inference dials, Design Motion Principles physics, and Impeccable contrast rules.
 * [ ] Task 4.2: Initialize Next.js 15 App Router project in frontend/ with TypeScript and Tailwind CSS.
 * [ ] Task 4.3: Configure OKLCH dark void theme tokens, typography clamp ceilings, and frosted glass classes.
 * [ ] Task 4.4: Implement zero-hydration WebGL wrapper pattern (GraphCanvasWrapper.tsx with ssr: false).

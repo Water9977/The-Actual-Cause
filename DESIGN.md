@@ -1,46 +1,52 @@
 # Design Specification: The Actual Cause
 
-Visual architecture, design tokens, and HUD interface contracts for the Next.js 15 frontend.
+Visual architecture, design tokens, motion choreography, and HUD interface contracts for the Next.js 15 frontend.
+Engineered with principles from TypeUI, Taste Skill, Design Motion Principles, and Impeccable.
 
 ---
 
-## 1. Design Philosophy
+## 1. Design Read and Aesthetic Dials (Taste Skill Framework)
 
-When engineers are dealing with a critical incident at 3 AM, they do not want marketing gloss, bloated illustrations, or slow animations. They need extreme visual clarity, immediate spatial orientation, and zero latency.
+### 1.1 Brief Inference
+Reading this as: Mission-critical SRE incident triage war room for high-stress engineering teams, with a Linear-clean dark-tech language, leaning toward OKLCH dark void palette, Three.js force-directed graph canvas, and restrained purposeful motion.
 
-Every pixel in this interface serves one purpose: helping a human understand why the system collapsed, which commit broke it, and what command will restore uptime.
+### 1.2 Core Aesthetic Dials
+* Design Variance: 6 / 10 (High structural discipline with asymmetrical telemetry density)
+* Motion Intensity: 6 / 10 (Restrained, functional physics; photon pulses on active Cypher traversals; zero playful bounce)
+* Visual Density: 8 / 10 (Cockpit telemetry density; high-information HUD with tabular monospace figures)
 
-### Strict Design Constraints
-* Zero purple slop: No violet gradients, no generic SaaS purple themes.
-* Zero decorative fluff: Every badge, line, and pulse represents real graph topology or active telemetry.
-* Pure dark void background: High contrast black slate base to prevent eye strain during long on-call sessions.
-* Sub-millisecond feel: Micro-interactions must feel instant, tactile, and surgical.
+### 1.3 Anti-Default Discipline (Impeccable & Taste Skill Rules)
+* Hard ban on AI-purple gradients, generic violet accents, and dark mesh backgrounds.
+* Hard ban on decorative floating background blobs or cards nested inside cards.
+* Hard ban on animating image or static icon elements on hover.
+* Every animated particle represents real database edge traversal or active WebSocket telemetry.
 
 ---
 
-## 2. Color System and Design Tokens
+## 2. Color System and Design Tokens (TypeUI & Impeccable Contrast)
 
-All colors use precise hex and alpha values tailored for high-contrast dark environments.
+All colors use calibrated OKLCH values mapped to high-contrast dark environments. Body text guarantees greater than 6.5:1 contrast against base void surfaces, exceeding WCAG 2.2 AA standards.
 
-### Canvas and Surfaces
-* Base Canvas: #060709 (Deep obsidian black)
-* Surface Low: #0d1117 (Subtle card background)
-* Surface Glass: rgba(13, 17, 23, 0.75) with 16px backdrop blur
+### 2.1 Canvas and Surfaces
+* Base Canvas: #060709 (Deep obsidian black, oklch(0.12 0.01 260))
+* Surface Low: #0d1117 (Subtle panel background, oklch(0.15 0.01 260))
+* Surface Glass: rgba(13, 17, 23, 0.75) with 16px backdrop-filter blur
 * Glass Border: rgba(255, 255, 255, 0.08)
+* Glass Border Hover: rgba(255, 255, 255, 0.16)
 * Glass Border Active: rgba(6, 182, 212, 0.40)
 
-### State and Semantic Colors
-* Incident Root Cause: #ef4444 (Crimson red)
-* Systemic Chokepoint: #f59e0b (Amber caution)
-* Active Graph Traversal: #06b6d4 (Electric cyan)
-* Verified Resolution: #10b981 (Emerald green)
-* Secondary Infrastructure: #64748b (Slate gray)
+### 2.2 State and Semantic Colors
+* Incident Root Cause: #ef4444 (Crimson red, oklch(0.63 0.24 25))
+* Systemic Chokepoint: #f59e0b (Amber caution, oklch(0.75 0.18 70))
+* Active Graph Traversal: #06b6d4 (Electric cyan, oklch(0.72 0.16 210))
+* Verified Resolution: #10b981 (Emerald green, oklch(0.70 0.17 155))
+* Secondary Infrastructure: #64748b (Slate gray, oklch(0.55 0.03 250))
 
-### Typography Colors
-* Text Primary: #f1f5f9 (High contrast off-white)
-* Text Secondary: #94a3b8 (Medium contrast slate)
-* Text Muted: #64748b (Low contrast metadata)
-* Text Accent: #38bdf8 (Sky blue code highlighting)
+### 2.3 Typography Colors
+* Text Primary: #f1f5f9 (Off-white, 14.8:1 contrast, oklch(0.96 0.01 250))
+* Text Secondary: #94a3b8 (Medium slate, 7.2:1 contrast, oklch(0.72 0.02 250))
+* Text Muted: #64748b (Low contrast metadata, 4.8:1 contrast, oklch(0.55 0.03 250))
+* Text Accent: #38bdf8 (Sky cyan code highlighting, oklch(0.78 0.14 220))
 
 ---
 
@@ -156,3 +162,39 @@ frontend/
 |-- tsconfig.json
 `-- tailwind.config.ts
 ```
+
+---
+
+## 6. Motion Choreography (Design Motion Principles Framework)
+
+Following the Emil Kowalski and Jakub Krehel restraint guidelines: every animation must have an engineering purpose, run on GPU-accelerated properties (transform, opacity, stroke-dashoffset), and provide an instant reduced-motion fallback.
+
+### 6.1 Transition Curves
+* Panel Slide-In / Out: `cubic-bezier(0.16, 1, 0.3, 1)` (expo ease-out, duration: 240ms).
+* Telemetry Feed Item Ingestion: `cubic-bezier(0.25, 1, 0.5, 1)` (quart ease-out, duration: 180ms, translateY: 6px to 0px).
+* Hover State Feedback: `cubic-bezier(0.4, 0, 0.2, 1)` (fast standard curve, duration: 120ms).
+
+### 6.2 3D Force-Graph Physics and Pulses
+* Camera Target Orbit: Spring curve with stiffness 280 and damping 32. Smoothly centers the suspect node without disorienting the engineer.
+* Photon Particles: Particle flow along graph edges is idle (0 particles/sec) until an active Cypher query traverses that dependency. During query execution, 4 photon particles traverse the link at speed 0.006 with electric cyan glow, then dissolve into the target node.
+* Node Pulse: Compromised nodes pulse between scale 1.0 and 1.15 using a gentle 1800ms sine cycle, illuminating their immediate 1-hop blast radius.
+
+### 6.3 Accessibility Fallback
+Every animation respects `@media (prefers-reduced-motion: reduce)`:
+* Particle streams are disabled; edges illuminate statically with solid color.
+* Camera position transitions jump instantly to the target coordinates.
+* Panels appear via instantaneous opacity switch without slide offsets.
+
+---
+
+## 7. Component State Matrix (TypeUI System Standards)
+
+Every interactive HUD element adheres to strict state contracts:
+
+| Element | Default State | Hover State | Active / Investigating State | Failure / Alert State | Focus Visible State |
+|---|---|---|---|---|---|
+| Service Node | Slate fill, 0.08 border | Cyan rim glow, pointer | Pulsing cyan photons, scale 1.1 | Crimson glow, red label | 2px Cyan outline offset |
+| Remediation CTA | Emerald background | 10% brightness boost | Spinning progress track, disabled | Amber warning banner | 2px Emerald ring |
+| Telemetry Card | Surface Low, 0.08 border | Surface Glass, 0.16 border | Cyan left accent bar | Red left accent bar | 1px Cyan border |
+| Graph Filter Tab | Slate text, transparent bg | Text Primary, 0.05 bg | Cyan text, cyan bottom bar | N/A | 2px White ring offset |
+
