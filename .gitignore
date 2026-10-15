@@ -16,6 +16,8 @@ backend/.env
 
 # Cloned External Reference Repositories
 falkordb/
+rea/
+scrapling/
 
 # Node & Next.js (Frontend)
 node_modules/
