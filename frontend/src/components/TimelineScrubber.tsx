@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Play, Pause, RotateCcw, Clock } from "lucide-react";
+import { Icon } from "@iconify/react";
 
 interface TimelineScrubberProps {
   progress: number;
@@ -38,34 +38,34 @@ export function TimelineScrubber({ progress, onChange }: TimelineScrubberProps) 
 
   const getCurrentTime = () => {
     const minutes = Math.round((1 - progress) * 15);
-    if (minutes === 0) return "T+00m (Current Alert)";
+    if (minutes === 0) return "T+00m 00s (Symptom Alert)";
     return `T-${minutes.toString().padStart(2, "0")}m 00s`;
   };
 
   return (
-    <div className="h-14 border-t border-zinc-800 bg-zinc-950 px-4 flex items-center justify-between gap-6 text-xs select-none">
+    <div className="h-14 border-t border-zinc-800/80 bg-zinc-950/95 backdrop-blur-md px-4 flex items-center justify-between gap-6 text-xs select-none relative z-30">
       {/* Play Controls */}
       <div className="flex items-center gap-2">
         <button
           onClick={() => setIsPlaying(!isPlaying)}
-          className="p-1.5 rounded bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 transition-colors"
+          className="p-1.5 rounded bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 transition-colors"
           title={isPlaying ? "Pause timeline replay" : "Replay incident cascade"}
         >
-          {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
+          <Icon icon={isPlaying ? "ph:pause-light" : "ph:play-light"} className="w-3.5 h-3.5" />
         </button>
         <button
           onClick={() => {
             setIsPlaying(false);
             onChange(0.16);
           }}
-          className="p-1.5 rounded bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-zinc-400 hover:text-zinc-200 transition-colors"
+          className="p-1.5 rounded bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-800 text-zinc-400 hover:text-zinc-200 transition-colors"
           title="Reset to incident trigger"
         >
-          <RotateCcw className="w-3.5 h-3.5" />
+          <Icon icon="ph:arrow-counter-clockwise-light" className="w-3.5 h-3.5" />
         </button>
 
         <div className="flex items-center gap-1.5 font-mono text-[11px] text-zinc-300 ml-2">
-          <Clock className="w-3.5 h-3.5 text-zinc-500" />
+          <Icon icon="ph:timer-light" className="w-3.5 h-3.5 text-zinc-500" />
           <span className="font-semibold text-zinc-100">{getCurrentTime()}</span>
         </div>
       </div>
@@ -87,20 +87,24 @@ export function TimelineScrubber({ progress, onChange }: TimelineScrubberProps) 
 
         {/* Milestone Marks */}
         <div className="flex justify-between w-full mt-1.5 font-mono text-[10px] text-zinc-500">
-          {MILESTONES.map((m) => (
-            <button
-              key={m.time}
-              onClick={() => {
-                setIsPlaying(false);
-                onChange(m.position);
-              }}
-              className={`hover:text-zinc-300 transition-colors ${
-                progress >= m.position ? "text-zinc-300 font-medium" : "text-zinc-600"
-              }`}
-            >
-              {m.label}
-            </button>
-          ))}
+          {MILESTONES.map((m) => {
+            const isActive = Math.abs(progress - m.position) < 0.08 || progress >= m.position;
+            return (
+              <button
+                key={m.time}
+                onClick={() => {
+                  setIsPlaying(false);
+                  onChange(m.position);
+                }}
+                className={`hover:text-zinc-300 transition-colors flex items-center gap-1 ${
+                  isActive ? "text-zinc-200 font-medium" : "text-zinc-600"
+                }`}
+              >
+                {isActive && <span className="w-1 h-1 rounded-full bg-emerald-400" />}
+                {m.label}
+              </button>
+            );
+          })}
         </div>
       </div>
     </div>

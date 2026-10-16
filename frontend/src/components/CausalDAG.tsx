@@ -1,18 +1,18 @@
 "use client";
 
-import React, { useMemo, useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import {
   ReactFlow,
-  Background,
   Controls,
   Node,
   Edge,
   useNodesState,
   useEdgesState,
-  BackgroundVariant,
 } from "@xyflow/react";
 import dagre from "@dagrejs/dagre";
-import { CauseNode, CauseNodeData } from "./CauseNode";
+import { CauseNode } from "./CauseNode";
+import { AnimatedGridPattern } from "@/components/ui/animated-grid-pattern";
+import { Icon } from "@iconify/react";
 import "@xyflow/react/dist/style.css";
 
 interface CausalDAGProps {
@@ -33,8 +33,8 @@ function getLayoutedElements(nodes: Node[], edges: Edge[]) {
 
   dagreGraph.setGraph({
     rankdir: "LR", // Left to Right causal flow
-    nodesep: 40,
-    ranksep: 90,
+    nodesep: 45,
+    ranksep: 95,
   });
 
   nodes.forEach((node) => {
@@ -86,12 +86,23 @@ export function CausalDAG({
     const activeNodeIds = new Set(activeNodes.map((n) => n.id));
     const activeEdges = layoutedEdges.filter(
       (e) => activeNodeIds.has(e.source) && activeNodeIds.has(e.target)
-    );
+    ).map((edge) => {
+      // Highlight root cause edges with crimson styling
+      const isRootEdge = edge.source === "c92f8a1" || edge.target === "c92f8a1";
+      return {
+        ...edge,
+        animated: true,
+        style: {
+          stroke: isRootEdge ? "#ef4444" : "#52525b",
+          strokeWidth: isRootEdge ? 2 : 1.25,
+        },
+      };
+    });
 
     setNodes(activeNodes);
     setEdges(activeEdges);
 
-    // Smooth 3-phase initial entrance
+    // Smooth entrance prevents layout flash
     const timer = setTimeout(() => {
       setLayoutReady(true);
     }, 120);
@@ -112,8 +123,17 @@ export function CausalDAG({
 
   return (
     <div className="w-full h-full relative bg-zinc-950 overflow-hidden select-none">
+      {/* Background Animated Technical Grid */}
+      <AnimatedGridPattern
+        width={36}
+        height={36}
+        numSquares={20}
+        maxOpacity={0.12}
+        className="opacity-70"
+      />
+
       <div
-        className={`w-full h-full transition-opacity duration-300 ${
+        className={`w-full h-full transition-opacity duration-300 relative z-10 ${
           layoutReady ? "opacity-100" : "opacity-0"
         }`}
       >
@@ -132,39 +152,37 @@ export function CausalDAG({
           proOptions={{ hideAttribution: true }}
           defaultEdgeOptions={{
             type: "smoothstep",
-            style: { stroke: "#52525b", strokeWidth: 1.5 },
+            style: { stroke: "#52525b", strokeWidth: 1.25 },
             animated: true,
           }}
         >
-          <Background
-            variant={BackgroundVariant.Dots}
-            gap={24}
-            size={1}
-            color="#27272a"
-          />
           <Controls
             showInteractive={false}
-            className="!bg-zinc-900 !border-zinc-800 !rounded !text-zinc-400 [&>button]:!border-zinc-800 [&>button]:!bg-zinc-900 [&>button:hover]:!bg-zinc-800 [&>button]:!text-zinc-400"
+            className="!bg-zinc-900/90 !backdrop-blur-sm !border !border-zinc-800 !rounded !text-zinc-400 [&>button]:!border-zinc-800 [&>button]:!bg-zinc-900 [&>button:hover]:!bg-zinc-800 [&>button]:!text-zinc-300"
           />
         </ReactFlow>
       </div>
 
-      {/* Watermark / Legend */}
-      <div className="absolute top-3 left-4 pointer-events-none flex items-center gap-3 font-mono text-[11px] text-zinc-500">
-        <span className="flex items-center gap-1.5">
-          <span className="w-2 h-2 rounded-full bg-red-500" />
+      {/* Sterile Technical Legend */}
+      <div className="absolute top-3 left-4 pointer-events-none flex items-center gap-3.5 font-mono text-[10px] text-zinc-400 bg-zinc-950/80 backdrop-blur-md px-3 py-1.5 rounded border border-zinc-800/80 z-20">
+        <span className="flex items-center gap-1.5 text-zinc-300 font-medium">
+          <Icon icon="ph:pulse-light" className="w-3 h-3 text-zinc-500" />
+          <span>SIGNALS:</span>
+        </span>
+        <span className="flex items-center gap-1.5 text-red-400">
+          <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
           Root Cause
         </span>
-        <span className="flex items-center gap-1.5">
-          <span className="w-2 h-2 rounded-full bg-amber-500" />
-          Degraded Service
+        <span className="flex items-center gap-1.5 text-amber-400">
+          <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+          Degraded
         </span>
-        <span className="flex items-center gap-1.5">
-          <span className="w-2 h-2 rounded-full bg-zinc-600" />
-          Affected Downstream
+        <span className="flex items-center gap-1.5 text-zinc-400">
+          <span className="w-1.5 h-1.5 rounded-full bg-zinc-600" />
+          Affected
         </span>
-        <span className="flex items-center gap-1.5">
-          <span className="w-2 h-2 rounded-full bg-emerald-500" />
+        <span className="flex items-center gap-1.5 text-emerald-400">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
           Healthy Baseline
         </span>
       </div>

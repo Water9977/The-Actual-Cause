@@ -7,7 +7,7 @@ import { CausalDAG } from "@/components/CausalDAG";
 import { TimelineScrubber } from "@/components/TimelineScrubber";
 import { EvidenceDrawer } from "@/components/EvidenceDrawer";
 import { CommandPalette } from "@/components/CommandPalette";
-import { Activity, ShieldAlert, GitCommit, CheckCircle2 } from "lucide-react";
+import { Icon } from "@iconify/react";
 
 const API_BASE = "http://localhost:8000";
 const WS_BASE = "ws://localhost:8000";
@@ -26,10 +26,10 @@ const FALLBACK_INCIDENT = {
         label: "Git Commit c92f8a1",
         kind: "Commit",
         subtext: "RFC-308: redis maxmemory-policy change",
-        author: "sarah.dev@company.internal",
+        author: "Dave Chen (Junior Frontend)",
         status: "root_cause",
         timestamp: "T-14m 22s",
-        details: "Commit modified helm values: maxmemory-policy allkeys-random. Triggered hot key evictions.",
+        details: "PR #1482 changed maxmemory-policy to noeviction. Saturated Redis under quote traffic.",
       },
     },
     {
@@ -37,12 +37,12 @@ const FALLBACK_INCIDENT = {
       type: "causeNode",
       position: { x: 320, y: 150 },
       data: {
-        label: "Config Drift: Redis Pod",
+        label: "Config Drift: PricingRedisCluster",
         kind: "ConfigDrift",
-        subtext: "policy: allkeys-random (evicted pricing keys)",
+        subtext: "policy: noeviction (out of memory command rejected)",
         status: "root_cause",
         timestamp: "T-11m 05s",
-        details: "Deployment applied to redis-cache-0. Pricing tier keys randomly purged under memory pressure.",
+        details: "Applied to PricingRedisCluster. Memory exhausted at 64GB, rejecting writes.",
       },
     },
     {
@@ -76,7 +76,7 @@ const FALLBACK_INCIDENT = {
       type: "causeNode",
       position: { x: 600, y: 280 },
       data: {
-        label: "pricing-db (PostgreSQL)",
+        label: "OrderPostgresPrimary",
         kind: "Database",
         subtext: "Connection pool 100/100 exhausted",
         status: "affected",
@@ -89,7 +89,7 @@ const FALLBACK_INCIDENT = {
       type: "causeNode",
       position: { x: 880, y: 320 },
       data: {
-        label: "AuthService",
+        label: "AuthGateway",
         kind: "Service",
         subtext: "Checked, healthy. Latency 14ms (baseline)",
         status: "healthy",
@@ -144,22 +144,22 @@ const FALLBACK_INCIDENT = {
     affected: [
       { name: "CheckoutService", symptom: "HTTP 504 Gateway Timeout, circuit breaker tripped" },
       { name: "PricingService", symptom: "p99 latency 14.8s, cache miss rate 98.4%" },
-      { name: "pricing-db (PostgreSQL)", symptom: "Connection pool 100/100 active connections" },
+      { name: "OrderPostgresPrimary", symptom: "Connection pool 100/100 active connections" },
     ],
     healthy: [
-      { name: "AuthService", metric: "Latency 14ms, 0 errors, connection pool 12/50" },
-      { name: "PaymentGateway (Stripe API)", metric: "200 OK, latency 88ms" },
+      { name: "AuthGateway", metric: "Latency 14ms, 0 errors, connection pool 12/50" },
+      { name: "InventoryService", metric: "200 OK, latency 42ms, replica lag 12ms" },
     ],
     changed_elsewhere: [
-      { name: "inventory-worker-cron", detail: "Nightly batch job ran at 02:00 UTC, unrelated to latency" },
+      { name: "PR #1482 (Dave Chen)", detail: "Changed maxmemory-policy to noeviction under RFC-308" },
     ],
     not_checked: [
       { name: "AnalyticsIngestCluster", reason: "Isolated from core checkout path" },
     ],
   },
   cypher_query:
-    "MATCH path = (c:Commit {hash: 'c92f8a1'})-[:TRIGGERED|DEPLOYED_IN*1..4]->(s:Service {name: 'CheckoutService'}) RETURN path;",
-  cypher_latency_ms: 1.42,
+    "MATCH path = (c:Commit {hash: 'c92f8a1'})-[:MODIFIES_INFRA]->(i:Infrastructure)<-[:DEPENDS_ON]-(s:Service {name: 'PricingService'})<-[:DEPENDS_ON*1..2]-(root:Service {name: 'CheckoutService'}) RETURN path;",
+  cypher_latency_ms: 1.09,
 };
 
 export default function IncidentConsole() {
@@ -341,7 +341,7 @@ export default function IncidentConsole() {
         body: JSON.stringify({
           incident_id: data.incident_id,
           command: "CONFIG SET maxmemory-policy allkeys-lru",
-          target_node: "redis-cache-0",
+          target_node: "PricingRedisCluster",
         }),
       });
       if (res.ok) {
@@ -384,26 +384,28 @@ export default function IncidentConsole() {
         onOpenCommandPalette={() => setCommandPaletteOpen(true)}
       />
 
-      {/* 2. Optional Active Agent Live Telemetry HUD */}
+      {/* 2. Swarm Active Agent Live Telemetry HUD */}
       {activeAgentInfo && (
-        <div className="h-8 bg-zinc-900 border-b border-zinc-800 px-4 flex items-center justify-between text-xs font-mono select-none animate-fadeIn">
+        <div className="h-8 bg-zinc-900/90 backdrop-blur-md border-b border-zinc-800/80 px-4 flex items-center justify-between text-xs font-mono select-none z-30">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
+            <Icon icon="ph:brain-light" className="w-3.5 h-3.5 text-amber-400" />
             <span className="text-amber-400 font-semibold">
-              [AGENT {activeAgentInfo.agent} // {activeAgentInfo.codename}]
+              [AGENT {activeAgentInfo.agent}: {activeAgentInfo.codename}]
             </span>
             <span className="text-zinc-300 truncate max-w-xl">
               {activeAgentInfo.phase}
             </span>
           </div>
-          <span className="text-[10px] text-zinc-500">
-            FalkorDB Traversal Active
+          <span className="text-[10px] text-zinc-500 font-mono flex items-center gap-1">
+            <Icon icon="ph:database-light" className="w-3 h-3 text-emerald-400" />
+            <span>FalkorDB GraphBLAS Active</span>
           </span>
         </div>
       )}
 
       {/* 3. Main Middle Viewport: Causal DAG + Evidence Drawer */}
-      <div className="flex-1 flex overflow-hidden">
+      <div className="flex-1 flex overflow-hidden relative">
         {/* Left Causal DAG */}
         <main className="flex-1 h-full relative">
           <CausalDAG
