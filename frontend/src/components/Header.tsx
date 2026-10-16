@@ -9,6 +9,8 @@ interface HeaderProps {
   queryLatencyMs: number;
   nodeCount: number;
   relCount: number;
+  isTriaging: boolean;
+  onTriggerTriage: () => void;
   onOpenCommandPalette: () => void;
 }
 
@@ -20,6 +22,8 @@ export function Header({
   queryLatencyMs,
   nodeCount,
   relCount,
+  isTriaging,
+  onTriggerTriage,
   onOpenCommandPalette,
 }: HeaderProps) {
   return (
@@ -70,6 +74,28 @@ export function Header({
 
       {/* Right: Actions & Cmd+K */}
       <div className="flex items-center gap-2">
+        <button
+          onClick={onTriggerTriage}
+          disabled={isTriaging}
+          className={`flex items-center gap-1.5 px-2.5 py-1 rounded font-mono text-[11px] font-semibold transition-colors ${
+            isTriaging
+              ? "bg-amber-950/80 text-amber-300 border border-amber-800/80 cursor-wait"
+              : "bg-emerald-950 hover:bg-emerald-900/90 text-emerald-300 border border-emerald-800 cursor-pointer"
+          }`}
+        >
+          {isTriaging ? (
+            <>
+              <div className="w-2.5 h-2.5 border-2 border-amber-400 border-t-transparent rounded-full animate-spin" />
+              <span>SWARM TRIAGING...</span>
+            </>
+          ) : (
+            <>
+              <Activity className="w-3 h-3 text-emerald-400" />
+              <span>RUN SWARM TRIAGE</span>
+            </>
+          )}
+        </button>
+
         <button
           onClick={onOpenCommandPalette}
           className="flex items-center gap-2 px-2.5 py-1 bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 rounded text-zinc-400 hover:text-zinc-200 transition-colors"
