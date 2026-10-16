@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+:root {
+  --background: #09090b;
+  --foreground: #f4f4f5;
+}
+
+body {
+  background-color: #09090b;
+  color: #f4f4f5;
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow: hidden;
+}
+
+/* React Flow SRE Overrides */
+.react-flow__handle {
+  background-color: #71717a !important;
+  border: 2px solid #09090b !important;
+  width: 7px !important;
+  height: 7px !important;
+  border-radius: 2px !important;
+}
+
+.react-flow__handle-left {
+  left: -4px !important;
+}
+
+.react-flow__handle-right {
+  right: -4px !important;
+}
+
+.react-flow__edge-path {
+  stroke: #52525b !important;
+  stroke-width: 1.5px !important;
+}
+
+.react-flow__controls-button {
+  background: #18181b !important;
+  border-bottom: 1px solid #27272a !important;
+  color: #a1a1aa !important;
+  fill: #a1a1aa !important;
+}
+
+.react-flow__controls-button:hover {
+  background: #27272a !important;
+  color: #f4f4f5 !important;
+  fill: #f4f4f5 !important;
+}
+
+.react-flow__controls-button svg {
+  fill: currentColor !important;
+}

@@ -1,10 +1,17 @@
 import time
 import logging
+import re
 from typing import Optional, Any
 from falkordb import FalkorDB
 from backend.config import settings
 
 logger = logging.getLogger("synapse.database")
+
+_WRITE_KEYWORDS = re.compile(r'\b(CREATE|MERGE|SET|DELETE|REMOVE|DROP)\b', re.IGNORECASE)
+
+def is_write_query(cypher: str) -> bool:
+    """Detects whether a Cypher query contains graph-mutating operations."""
+    return bool(_WRITE_KEYWORDS.search(cypher))
 
 class FalkorDBManager:
     _instance: Optional["FalkorDBManager"] = None
