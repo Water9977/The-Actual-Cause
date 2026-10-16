@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  # 1. FalkorDB Graph Database Engine (GraphBLAS Sparse Matrix Algebra)
+  falkordb:
+    image: falkordb/falkordb:latest
+    container_name: synapse_falkordb
+    ports:
+      - "6379:6379"
+    volumes:
+      - falkordb_data:/var/lib/redis
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+
+  # 2. Synapse-OS Swarm Intelligence Backend (FastAPI / Gemini 3.8 Flash)
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: synapse_backend
+    ports:
+      - "8000:8000"
+    environment:
+      - FALKORDB_HOST=falkordb
+      - FALKORDB_PORT=6379
+      - FALKORDB_MASTER_GRAPH=enterprise_master
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - DEFAULT_LLM_MODEL=gemini/gemini-3.8-flash
+      - FAST_LLM_MODEL=gemini/gemini-3.8-flash
+      - REASONING_LLM_MODEL=gemini/gemini-3.8-flash
+    depends_on:
+      falkordb:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    restart: unless-stopped
+
+  # 3. Next.js 16 Tactical SRE Workbench (Orthographic Causal DAG & HUD)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: synapse_frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+      - NEXT_PUBLIC_WS_URL=ws://localhost:8000/ws/telemetry
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  falkordb_data:

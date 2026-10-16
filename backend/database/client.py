@@ -58,6 +58,7 @@ class FalkorDBManager:
             g.query("RETURN 1")
             return True
         except Exception:
+            self._client = None
             return False
 
     def get_master_graph(self):

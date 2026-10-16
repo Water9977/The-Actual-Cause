@@ -1,6 +1,7 @@
 import asyncio
 import logging
 from typing import List, Dict, Any, Optional
+from contextlib import asynccontextmanager
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -15,10 +16,38 @@ from backend.agents.swarm_router import swarm_router
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
 logger = logging.getLogger("synapse.main")
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    logger.info("Initializing Synapse-OS backend lifespan...")
+    # Attempt to verify connection and auto-seed if graph is empty
+    for attempt in range(5):
+        if db_manager.is_connected():
+            try:
+                client = db_manager.connect()
+                g = client.select_graph(settings.FALKORDB_MASTER_GRAPH)
+                res = g.query("MATCH (n) RETURN count(n) AS cnt;")
+                cnt = res.result_set[0][0] if res.result_set else 0
+                if cnt == 0:
+                    logger.info("Graph is empty. Auto-seeding enterprise incident topology...")
+                    seed_enterprise_graph(settings.FALKORDB_MASTER_GRAPH)
+                    logger.info("Auto-seeding enterprise incident topology complete.")
+                else:
+                    logger.info(f"FalkorDB enterprise graph verified with {cnt} nodes.")
+                break
+            except Exception as e:
+                logger.warning(f"Error checking or seeding graph: {e}")
+                break
+        else:
+            logger.info(f"Waiting for FalkorDB to accept connections (attempt {attempt + 1}/5)...")
+            await asyncio.sleep(1)
+    yield
+    logger.info("Synapse-OS backend shutting down...")
+
 app = FastAPI(
     title=settings.PROJECT_NAME,
     version=settings.VERSION,
-    description="Autonomous Cascading Incident Triage & Organizational Memory Engine over FalkorDB"
+    description="Autonomous Cascading Incident Triage & Organizational Memory Engine over FalkorDB",
+    lifespan=lifespan
 )
 
 # CORS Middleware
