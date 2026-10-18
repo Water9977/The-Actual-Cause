@@ -59,6 +59,9 @@ def initialize_schema(graph_name: str = settings.FALKORDB_MASTER_GRAPH):
                 logger.warning(f"Notice on full-text index for {label}: {e}")
 
     logger.info(f"Schema initialization complete for graph '{graph_name}'.")
+    return {"status": "complete", "graph": graph_name}
+
+init_schema = initialize_schema
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)

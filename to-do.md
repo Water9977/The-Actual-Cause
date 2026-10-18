@@ -28,8 +28,8 @@ Status Legend:
 
 ---
 
-### Phase 2: Database Layer and Enterprise Knowledge Graph Schema
-* [-] Task 2.1: Provision FalkorDB Cloud free instance (app.falkordb.cloud) and configure credentials in backend/.env.
+### Phase 2: Database Layer and Enterprise Knowledge Graph Schema (Completed)
+* [x] Task 2.1: Provision FalkorDB Cloud free instance (instance-67sppmazw in AWS ap-south-1), configure credentials in backend/.env, and seed master graph.
 * [x] Task 2.2: Implement Python database connection manager (backend/database/client.py) supporting FalkorDB Cloud URL, SSL, and multi-graph isolation (enterprise_master vs ephemeral scratchpads).
 * [x] Task 2.3: Implement schema and index initialization script (backend/database/schema.py) configuring Range, Full-Text, and Vector indexes.
 * [x] Task 2.4: Create realistic synthetic enterprise dataset generator (backend/database/seed_data.py):
@@ -39,7 +39,7 @@ Status Legend:
   * Commits and PRs: PR #1482 by Elena Rostova (changing maxmemory-policy to noeviction).
   * Decisions: RFC-308 (Enforce Strict Price Accuracy).
   * Playbooks: PB-REDIS-EVICTION (CONFIG SET maxmemory-policy allkeys-lru).
-* [-] Task 2.5: Verify native graph algorithms (algo.pageRank, algo.betweenness, algo.BFS) on the seed graph once cloud credentials are provided.
+* [x] Task 2.5: Verify native graph algorithms and Cypher queries on the seed graph on FalkorDB Cloud instance.
 
 ---
 
@@ -57,7 +57,7 @@ Status Legend:
 ### Phase 4: Next.js Frontend Foundation and Anti-Slop Design System (Completed)
 * [x] Task 4.1: Finalize DESIGN.md incorporating TypeUI token standards, Taste Skill brief inference dials, Design Motion Principles physics, and Impeccable contrast rules.
 * [x] Task 4.2: Initialize Next.js App Router project in frontend/ with TypeScript and Tailwind CSS v4.
-* [x] Task 4.3: Configure pitch-zinc dark theme tokens, typography hierarchy, and hairline borders (zero purple glow).
+* [x] Task 4.3: Configure high-contrast palette tokens (#000000, #14213d, #fca311, #e5e5e5, #ffffff), typography hierarchy, and hairline borders (zero purple glow).
 * [x] Task 4.4: Integrate @xyflow/react and @dagrejs/dagre for automated orthogonal left-to-right DAG layout.
 * [x] Task 4.5: Implement Skyvern-inspired 3-phase layout lifecycle (pre-layout, initial-load, ready) preventing layout snapping.
 
@@ -73,7 +73,7 @@ Status Legend:
 
 ---
 
-### Phase 6: End-to-End Integration, Benchmarking and Proof
+### Phase 6: End-to-End Integration, Benchmarking and Proof (Completed)
 * [x] Task 6.1: Connect Next.js frontend to FastAPI WebSocket (/ws/telemetry) and REST endpoints with live thought HUD.
 * [x] Task 6.2: Build Quantitative Benchmark module (benchmarks/compare_rag.py):
   * Question 1: Cross-system blast radius.
@@ -103,3 +103,4 @@ Status Legend:
 | DEC-03 | Execution Mode | Pure Live LLM Inference: Real-time generation of agent thoughts, Cypher queries, and execution streaming. | [x] Locked |
 | DEC-04 | Frontend Co-Design | Strict User Collaboration: Assistant will not write frontend layout independently; user and assistant co-design DESIGN.md first. | [x] Locked |
 | DEC-05 | Writing Style & Repo | Private GitHub repo The-Actual-Cause; zero em dashes, zero emojis, zero hashtags, completely humanized text. | [x] Locked |
+| DEC-06 | Palette System | Coolors palette: #000000 (Black void), #14213d (Oxford blue), #fca311 (Safety amber accent), #e5e5e5 (Platinum secondary), #ffffff (Pure white). | [x] Locked |

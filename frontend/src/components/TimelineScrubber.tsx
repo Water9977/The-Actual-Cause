@@ -43,30 +43,30 @@ export function TimelineScrubber({ progress, onChange }: TimelineScrubberProps) 
   };
 
   return (
-    <div className="h-14 border-t border-zinc-800/80 bg-zinc-950/95 backdrop-blur-md px-4 flex items-center justify-between gap-6 text-xs select-none relative z-30">
+    <div className="h-14 border-t border-[#293548] bg-[#111827]/95 backdrop-blur-md px-4 flex items-center justify-between gap-6 text-xs select-none relative z-30">
       {/* Play Controls */}
       <div className="flex items-center gap-2">
         <button
           onClick={() => setIsPlaying(!isPlaying)}
-          className="p-1.5 rounded bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 transition-colors"
+          className="p-1.5 rounded bg-[#161f30] hover:bg-[#1e293b] border border-[#293548] text-slate-200 hover:text-white transition-colors"
           title={isPlaying ? "Pause timeline replay" : "Replay incident cascade"}
         >
-          <Icon icon={isPlaying ? "ph:pause-light" : "ph:play-light"} className="w-3.5 h-3.5" />
+          <Icon icon={isPlaying ? "solar:pause-bold" : "solar:play-bold"} className="w-3.5 h-3.5 text-[#38bdf8]" />
         </button>
         <button
           onClick={() => {
             setIsPlaying(false);
             onChange(0.16);
           }}
-          className="p-1.5 rounded bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-800 text-zinc-400 hover:text-zinc-200 transition-colors"
+          className="p-1.5 rounded bg-[#161f30] hover:bg-[#1e293b] border border-[#293548] text-slate-400 hover:text-white transition-colors"
           title="Reset to incident trigger"
         >
-          <Icon icon="ph:arrow-counter-clockwise-light" className="w-3.5 h-3.5" />
+          <Icon icon="solar:restart-bold" className="w-3.5 h-3.5" />
         </button>
 
-        <div className="flex items-center gap-1.5 font-mono text-[11px] text-zinc-300 ml-2">
-          <Icon icon="ph:timer-light" className="w-3.5 h-3.5 text-zinc-500" />
-          <span className="font-semibold text-zinc-100">{getCurrentTime()}</span>
+        <div className="flex items-center gap-1.5 font-mono text-[11px] text-slate-300 ml-2">
+          <Icon icon="solar:clock-circle-bold-duotone" className="w-3.5 h-3.5 text-[#38bdf8]" />
+          <span className="font-semibold text-white">{getCurrentTime()}</span>
         </div>
       </div>
 
@@ -82,11 +82,11 @@ export function TimelineScrubber({ progress, onChange }: TimelineScrubberProps) 
             setIsPlaying(false);
             onChange(parseFloat(e.target.value));
           }}
-          className="w-full h-1 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-zinc-200 focus:outline-none"
+          className="w-full h-1.5 bg-[#0b0f17] border border-[#293548] rounded-lg appearance-none cursor-pointer accent-[#38bdf8] focus:outline-none"
         />
 
         {/* Milestone Marks */}
-        <div className="flex justify-between w-full mt-1.5 font-mono text-[10px] text-zinc-500">
+        <div className="flex justify-between w-full mt-1.5 font-mono text-[10px] text-slate-400">
           {MILESTONES.map((m) => {
             const isActive = Math.abs(progress - m.position) < 0.08 || progress >= m.position;
             return (
@@ -96,11 +96,11 @@ export function TimelineScrubber({ progress, onChange }: TimelineScrubberProps) 
                   setIsPlaying(false);
                   onChange(m.position);
                 }}
-                className={`hover:text-zinc-300 transition-colors flex items-center gap-1 ${
-                  isActive ? "text-zinc-200 font-medium" : "text-zinc-600"
+                className={`hover:text-white transition-colors flex items-center gap-1 ${
+                  isActive ? "text-[#38bdf8] font-semibold" : "text-slate-500"
                 }`}
               >
-                {isActive && <span className="w-1 h-1 rounded-full bg-emerald-400" />}
+                {isActive && <span className="w-1.5 h-1.5 rounded-full bg-[#38bdf8] shadow-[0_0_6px_#38bdf8]" />}
                 {m.label}
               </button>
             );

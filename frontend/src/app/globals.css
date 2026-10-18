@@ -1,23 +1,37 @@
 @import "tailwindcss";
 
 :root {
-  --background: #09090b;
-  --foreground: #f4f4f5;
+  --canvas-bg: #0b0f17;
+  --surface-panel: #111827;
+  --surface-card: #161f30;
+  --surface-elevated: #1e293b;
+  --border-hairline: #293548;
+  --border-strong: #3b4d66;
+  --accent-cyan: #38bdf8;
+  --accent-blue: #0ea5e9;
+  --signal-critical: #f43f5e;
+  --signal-warning: #fbbf24;
+  --signal-healthy: #10b981;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --background: #0b0f17;
+  --foreground: #f8fafc;
 }
 
 body {
-  background-color: #09090b;
-  color: #f4f4f5;
+  background-color: #0b0f17;
+  color: #f8fafc;
   font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   overflow: hidden;
 }
 
-/* React Flow SRE Overrides */
+/* React Flow SRE Overrides: Modern High-Contrast Slate & Cyan */
 .react-flow__handle {
-  background-color: #71717a !important;
-  border: 2px solid #09090b !important;
-  width: 7px !important;
-  height: 7px !important;
+  background-color: #38bdf8 !important;
+  border: 2px solid #0b0f17 !important;
+  width: 8px !important;
+  height: 8px !important;
   border-radius: 2px !important;
 }
 
@@ -30,21 +44,21 @@ body {
 }
 
 .react-flow__edge-path {
-  stroke: #52525b !important;
+  stroke: #293548 !important;
   stroke-width: 1.5px !important;
 }
 
 .react-flow__controls-button {
-  background: #18181b !important;
-  border-bottom: 1px solid #27272a !important;
-  color: #a1a1aa !important;
-  fill: #a1a1aa !important;
+  background: #111827 !important;
+  border-bottom: 1px solid #293548 !important;
+  color: #94a3b8 !important;
+  fill: #94a3b8 !important;
 }
 
 .react-flow__controls-button:hover {
-  background: #27272a !important;
-  color: #f4f4f5 !important;
-  fill: #f4f4f5 !important;
+  background: #1e293b !important;
+  color: #38bdf8 !important;
+  fill: #38bdf8 !important;
 }
 
 .react-flow__controls-button svg {

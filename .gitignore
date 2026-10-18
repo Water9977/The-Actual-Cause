@@ -10,9 +10,11 @@ __pycache__/
 
 # Environment Variables & Secrets
 .env
-.env.local
-.env.*.local
+.env*
+*.env
 backend/.env
+!*.env.example
+!.env.example
 
 # Cloned External Reference Repositories
 falkordb/

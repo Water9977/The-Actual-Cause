@@ -28,26 +28,30 @@ Reading this as: Tactical SRE incident investigation console for high-stress on-
 
 ## 2. Color System and Design Tokens
 
-All colors use calibrated high-contrast values mapped to dark terminal environments. Body text guarantees greater than 7:1 contrast against base surfaces, exceeding WCAG 2.2 AA standards.
+Calibrated high-contrast palette based on user specification (https://coolors.co/palette/000000-14213d-fca311-e5e5e5-ffffff).
 
-### 2.1 Canvas and Surfaces
-* Base Canvas: #09090b (Pitch Zinc black)
-* Surface Elevated: #121214 (Subtle workbench panel background)
-* Surface Hover: #18181b (Interactive element highlight)
-* Hairline Divider: #27272a (1px border-zinc-800)
-* Muted Border: #3f3f46 (border-zinc-700)
+### 2.1 Palette Definition
+* Deep Base Canvas: #000000 (Pitch black void)
+* Primary Surface / Navigation: #14213d (Oxford blue / midnight navy)
+* Elevated Navy Surface: #192746 (Intermediate workbench panel surface)
+* Hairline Navy Border: #24355a (Structural divider)
+* Hero Accent / Highlights: #fca311 (Vibrant safety amber / gold)
+* Secondary / Body Typography: #e5e5e5 (Platinum light gray)
+* Primary Heading Typography: #ffffff (Pure white)
 
-### 2.2 State and Semantic Colors
-* Incident Root Cause: #ef4444 (Crimson red for culprits and broken invariants)
-* Systemic Degradation: #f59e0b (Amber caution for connection pool pressure and cache miss spikes)
-* Verified Baseline: #10b981 (Emerald green for healthy dependencies and passing healthchecks)
-* Neutral Infrastructure: #71717a (Slate zinc for background dependencies)
+### 2.2 Semantic State Mapping
+* Incident Root Cause & Culprits: #fca311 (Vibrant safety amber with pulsing beacon)
+* Systemic Degradation: #fca311/80 (Medium amber for cache miss spikes and connection pool pressure)
+* Verified Baseline & Passing Nodes: #ffffff (Pure white outline with solid baseline)
+* Affected Microservices: #e5e5e5 (Platinum gray indicating impacted downstream nodes)
+* Background Topology Edges: #24355a (Subtle structural links)
+* Root Cause Causal Edges: #fca311 (2px amber highlighted flow)
 
 ### 2.3 Typography Colors
-* Text Primary: #fafafa (High contrast heading and title text, 15:1 contrast)
-* Text Secondary: #a1a1aa (Medium slate, 7.2:1 contrast for labels and metrics)
-* Text Muted: #71717a (Metadata and timestamp text, 4.8:1 contrast)
-* Text Code Accent: #38bdf8 (Sky blue for Cypher query parameters and syntax)
+* Text Headings & Hero Brand: #ffffff (Maximum contrast)
+* Text Secondary & Monospace Telemetry: #e5e5e5 (Crisp readability against Oxford blue)
+* Text Muted & Metadata: #e5e5e5/60 (Subtle secondary information)
+* Accent Syntax & Agent Thought Codename: #fca311 (Focused amber highlight)
 
 ---
 

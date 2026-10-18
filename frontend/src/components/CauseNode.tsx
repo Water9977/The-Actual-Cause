@@ -21,98 +21,98 @@ export function CauseNode({ data, selected }: { data: CauseNodeData; selected?: 
   const isHealthy = data.status === "healthy";
 
   const getStatusBorder = () => {
-    if (selected) return "ring-1 ring-zinc-300 border-zinc-300";
-    if (isRootCause) return "border-red-600/80";
-    if (isDegraded) return "border-amber-600/70";
-    if (isHealthy) return "border-emerald-700/60";
-    return "border-zinc-800/80";
+    if (selected) return "ring-1 ring-[#38bdf8] border-[#38bdf8]";
+    if (isRootCause) return "border-[#f43f5e] shadow-[0_0_15px_rgba(244,63,94,0.25)]";
+    if (isDegraded) return "border-[#fbbf24]/70";
+    if (isHealthy) return "border-[#10b981]/50";
+    return "border-[#293548]";
   };
 
   const getStatusBadge = () => {
-    if (isRootCause) return "bg-red-950/30 text-red-400 border-red-800/50";
-    if (isDegraded) return "bg-amber-950/30 text-amber-400 border-amber-800/50";
-    if (isHealthy) return "bg-emerald-950/30 text-emerald-400 border-emerald-800/50";
-    return "bg-zinc-900 text-zinc-400 border-zinc-800";
+    if (isRootCause) return "bg-[#f43f5e]/15 text-[#f43f5e] border-[#f43f5e]/40";
+    if (isDegraded) return "bg-[#fbbf24]/15 text-[#fbbf24] border-[#fbbf24]/40";
+    if (isHealthy) return "bg-[#10b981]/15 text-[#10b981] border-[#10b981]/40";
+    return "bg-[#1e293b] text-slate-300 border-[#293548]";
   };
 
   const getIcon = () => {
     switch (data.kind) {
       case "Commit":
-        return <Icon icon="ph:git-commit-light" className="w-3.5 h-3.5 text-red-400" />;
+        return <Icon icon="solar:git-commit-bold-duotone" className="w-3.5 h-3.5 text-[#38bdf8]" />;
       case "ConfigDrift":
-        return <Icon icon="ph:faders-horizontal-light" className="w-3.5 h-3.5 text-red-400" />;
+        return <Icon icon="solar:tuning-bold-duotone" className="w-3.5 h-3.5 text-[#fbbf24]" />;
       case "Database":
-        return <Icon icon="tabler:database" className="w-3.5 h-3.5 text-amber-400" />;
+        return <Icon icon="solar:database-bold-duotone" className="w-3.5 h-3.5 text-[#38bdf8]" />;
       case "Service":
         return isHealthy ? (
-          <Icon icon="ph:check-circle-light" className="w-3.5 h-3.5 text-emerald-400" />
+          <Icon icon="solar:check-circle-bold-duotone" className="w-3.5 h-3.5 text-[#10b981]" />
         ) : (
-          <Icon icon="tabler:server-2" className="w-3.5 h-3.5 text-zinc-300" />
+          <Icon icon="solar:server-bold-duotone" className="w-3.5 h-3.5 text-slate-300" />
         );
       case "Infrastructure":
-        return <Icon icon="ph:cpu-light" className="w-3.5 h-3.5 text-zinc-300" />;
+        return <Icon icon="solar:cpu-bold-duotone" className="w-3.5 h-3.5 text-slate-300" />;
       default:
-        return <Icon icon="ph:warning-circle-light" className="w-3.5 h-3.5 text-zinc-400" />;
+        return <Icon icon="solar:danger-triangle-bold-duotone" className="w-3.5 h-3.5 text-[#f43f5e]" />;
     }
   };
 
   return (
     <div
-      className={`relative w-72 bg-zinc-950/95 backdrop-blur-sm rounded border ${getStatusBorder()} transition-all duration-150 p-3 text-xs select-none shadow-sm hover:border-zinc-600`}
+      className={`relative w-72 bg-[#161f30]/95 backdrop-blur-sm rounded border ${getStatusBorder()} transition-all duration-150 p-3 text-xs select-none shadow-lg hover:border-[#38bdf8]/70`}
     >
       {/* BorderBeam for active Root Cause node */}
       {isRootCause && (
-        <BorderBeam size={70} duration={6} colorFrom="#ef4444" colorTo="#f59e0b" borderWidth={1.5} />
+        <BorderBeam size={70} duration={6} colorFrom="#f43f5e" colorTo="#38bdf8" borderWidth={1.5} />
       )}
 
       <Handle
         type="target"
         position={Position.Left}
-        className="!w-2 !h-2 !bg-zinc-700 !border !border-zinc-950 !rounded-full"
+        className={`!w-2 !h-2 ${isRootCause ? "!bg-[#f43f5e]" : "!bg-[#38bdf8]"} !border !border-[#0b0f17] !rounded-full`}
       />
 
       {/* Top Header Row */}
       <div className="flex items-center justify-between gap-2 mb-2">
         <div className="flex items-center gap-1.5">
           {getIcon()}
-          <span className="font-mono text-[10px] font-semibold text-zinc-300 uppercase tracking-wider">
+          <span className="font-mono text-[10px] font-semibold text-slate-200 uppercase tracking-wider">
             {data.kind}
           </span>
         </div>
         <div className="flex items-center gap-1.5">
           <span className={`px-1.5 py-0.5 rounded text-[9px] font-mono border ${getStatusBadge()} flex items-center gap-1`}>
-            {isRootCause && <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />}
+            {isRootCause && <span className="w-1.5 h-1.5 rounded-full bg-[#f43f5e] animate-pulse" />}
             {data.status.replace("_", " ").toUpperCase()}
           </span>
-          <span className="font-mono text-[10px] text-zinc-500">{data.timestamp}</span>
+          <span className="font-mono text-[10px] text-slate-400">{data.timestamp}</span>
         </div>
       </div>
 
       {/* Node Main Title */}
-      <div className="font-sans font-medium text-zinc-100 text-[13px] tracking-tight mb-1 truncate">
+      <div className="font-sans font-medium text-white text-[13px] tracking-tight mb-1 truncate">
         {data.label}
       </div>
 
       {/* Secondary Symptom/Metric Subtext */}
-      <div className="font-mono text-[11px] text-zinc-400 leading-snug line-clamp-2">
+      <div className="font-mono text-[11px] text-slate-300 leading-snug line-clamp-2">
         {data.subtext}
       </div>
 
-      {/* Optional Author or System ID */}
+      {/* Author Provenance Badge (Git nodes) */}
       {data.author && (
-        <div className="mt-2.5 pt-2 border-t border-zinc-900/80 flex items-center justify-between text-[10px] text-zinc-500 font-mono">
-          <span className="text-zinc-600">SME:</span>
-          <span className="text-zinc-300 truncate max-w-[170px] flex items-center gap-1">
-            <Icon icon="ph:user-light" className="w-2.5 h-2.5 text-zinc-500" />
-            {data.author}
+        <div className="mt-2 pt-2 border-t border-[#293548] flex items-center justify-between text-[10px] font-mono text-slate-400">
+          <span className="flex items-center gap-1">
+            <Icon icon="solar:user-bold-duotone" className="w-3 h-3 text-[#38bdf8]" />
+            <span>{data.author}</span>
           </span>
+          <span className="text-[#38bdf8] font-semibold">PR #1482</span>
         </div>
       )}
 
       <Handle
         type="source"
         position={Position.Right}
-        className="!w-2 !h-2 !bg-zinc-700 !border !border-zinc-950 !rounded-full"
+        className={`!w-2 !h-2 ${isRootCause ? "!bg-[#f43f5e]" : "!bg-[#38bdf8]"} !border !border-[#0b0f17] !rounded-full`}
       />
     </div>
   );

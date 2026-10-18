@@ -369,7 +369,7 @@ export default function IncidentConsole() {
   );
 
   return (
-    <div className="flex flex-col h-screen w-screen bg-zinc-950 text-zinc-100 overflow-hidden font-sans">
+    <div className="flex flex-col h-screen w-screen bg-[#0b0f17] text-slate-100 overflow-hidden font-sans">
       {/* 1. SRE Top Header */}
       <Header
         incidentId={data.incident_id}
@@ -386,19 +386,19 @@ export default function IncidentConsole() {
 
       {/* 2. Swarm Active Agent Live Telemetry HUD */}
       {activeAgentInfo && (
-        <div className="h-8 bg-zinc-900/90 backdrop-blur-md border-b border-zinc-800/80 px-4 flex items-center justify-between text-xs font-mono select-none z-30">
+        <div className="h-8 bg-[#111827]/95 backdrop-blur-md border-b border-[#293548] px-4 flex items-center justify-between text-xs font-mono select-none z-30">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
-            <Icon icon="ph:brain-light" className="w-3.5 h-3.5 text-amber-400" />
-            <span className="text-amber-400 font-semibold">
+            <span className="w-2 h-2 rounded-full bg-[#38bdf8] animate-ping" />
+            <Icon icon="solar:cpu-bolt-bold-duotone" className="w-3.5 h-3.5 text-[#38bdf8]" />
+            <span className="text-[#38bdf8] font-semibold">
               [AGENT {activeAgentInfo.agent}: {activeAgentInfo.codename}]
             </span>
-            <span className="text-zinc-300 truncate max-w-xl">
+            <span className="text-slate-200 truncate max-w-xl">
               {activeAgentInfo.phase}
             </span>
           </div>
-          <span className="text-[10px] text-zinc-500 font-mono flex items-center gap-1">
-            <Icon icon="ph:database-light" className="w-3 h-3 text-emerald-400" />
+          <span className="text-[10px] text-slate-400 font-mono flex items-center gap-1">
+            <Icon icon="solar:database-bold-duotone" className="w-3 h-3 text-[#38bdf8]" />
             <span>FalkorDB GraphBLAS Active</span>
           </span>
         </div>

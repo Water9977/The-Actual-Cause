@@ -2,7 +2,12 @@ import os
 from pydantic_settings import BaseSettings
 from dotenv import load_dotenv
 
-load_dotenv()
+# Explicitly load .env from backend directory if present, then fallback to cwd
+_backend_env = os.path.join(os.path.dirname(__file__), ".env")
+if os.path.exists(_backend_env):
+    load_dotenv(_backend_env, override=True)
+else:
+    load_dotenv()
 
 class Settings(BaseSettings):
     PROJECT_NAME: str = "SYNAPSE-OS"

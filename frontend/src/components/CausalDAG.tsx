@@ -87,14 +87,14 @@ export function CausalDAG({
     const activeEdges = layoutedEdges.filter(
       (e) => activeNodeIds.has(e.source) && activeNodeIds.has(e.target)
     ).map((edge) => {
-      // Highlight root cause edges with crimson styling
-      const isRootEdge = edge.source === "c92f8a1" || edge.target === "c92f8a1";
+      // Highlight root cause edges with vibrant signal rose styling
+      const isRootEdge = edge.source === "commit-c92f8a1" || edge.target === "config-drift";
       return {
         ...edge,
         animated: true,
         style: {
-          stroke: isRootEdge ? "#ef4444" : "#52525b",
-          strokeWidth: isRootEdge ? 2 : 1.25,
+          stroke: isRootEdge ? "#f43f5e" : "#293548",
+          strokeWidth: isRootEdge ? 2 : 1.5,
         },
       };
     });
@@ -122,14 +122,14 @@ export function CausalDAG({
   }, [onSelectNode]);
 
   return (
-    <div className="w-full h-full relative bg-zinc-950 overflow-hidden select-none">
+    <div className="w-full h-full relative bg-[#0b0f17] overflow-hidden select-none">
       {/* Background Animated Technical Grid */}
       <AnimatedGridPattern
         width={36}
         height={36}
         numSquares={20}
-        maxOpacity={0.12}
-        className="opacity-70"
+        maxOpacity={0.15}
+        className="opacity-50"
       />
 
       <div
@@ -152,37 +152,37 @@ export function CausalDAG({
           proOptions={{ hideAttribution: true }}
           defaultEdgeOptions={{
             type: "smoothstep",
-            style: { stroke: "#52525b", strokeWidth: 1.25 },
+            style: { stroke: "#293548", strokeWidth: 1.5 },
             animated: true,
           }}
         >
           <Controls
             showInteractive={false}
-            className="!bg-zinc-900/90 !backdrop-blur-sm !border !border-zinc-800 !rounded !text-zinc-400 [&>button]:!border-zinc-800 [&>button]:!bg-zinc-900 [&>button:hover]:!bg-zinc-800 [&>button]:!text-zinc-300"
+            className="!bg-[#111827] !backdrop-blur-sm !border !border-[#293548] !rounded !text-slate-300 [&>button]:!border-[#293548] [&>button]:!bg-[#111827] [&>button:hover]:!bg-[#161f30] [&>button:hover]:!text-[#38bdf8]"
           />
         </ReactFlow>
       </div>
 
       {/* Sterile Technical Legend */}
-      <div className="absolute top-3 left-4 pointer-events-none flex items-center gap-3.5 font-mono text-[10px] text-zinc-400 bg-zinc-950/80 backdrop-blur-md px-3 py-1.5 rounded border border-zinc-800/80 z-20">
-        <span className="flex items-center gap-1.5 text-zinc-300 font-medium">
-          <Icon icon="ph:pulse-light" className="w-3 h-3 text-zinc-500" />
+      <div className="absolute top-3 left-4 pointer-events-none flex items-center gap-3.5 font-mono text-[10px] text-slate-300 bg-[#111827]/90 backdrop-blur-md px-3 py-1.5 rounded border border-[#293548] z-20">
+        <span className="flex items-center gap-1.5 text-slate-100 font-medium">
+          <Icon icon="solar:pulse-2-bold-duotone" className="w-3 h-3 text-[#38bdf8]" />
           <span>SIGNALS:</span>
         </span>
-        <span className="flex items-center gap-1.5 text-red-400">
-          <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
+        <span className="flex items-center gap-1.5 text-[#f43f5e]">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#f43f5e] animate-pulse" />
           Root Cause
         </span>
-        <span className="flex items-center gap-1.5 text-amber-400">
-          <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+        <span className="flex items-center gap-1.5 text-[#fbbf24]">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#fbbf24]" />
           Degraded
         </span>
-        <span className="flex items-center gap-1.5 text-zinc-400">
-          <span className="w-1.5 h-1.5 rounded-full bg-zinc-600" />
+        <span className="flex items-center gap-1.5 text-slate-300">
+          <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
           Affected
         </span>
-        <span className="flex items-center gap-1.5 text-emerald-400">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+        <span className="flex items-center gap-1.5 text-[#10b981]">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#10b981]" />
           Healthy Baseline
         </span>
       </div>

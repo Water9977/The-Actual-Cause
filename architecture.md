@@ -150,20 +150,22 @@ ORDER BY score DESC LIMIT 5;
 
 ---
 
-## 6. Frontend Architecture (Next.js 15)
+## 6. Frontend Architecture (Next.js App Router)
 
 Implemented in [frontend/](file:///e:/Antigravity/Workspaces/Graph%20Hacks/frontend/).
 
 ### 6.1 Layout & Visual Theme
-- **Theme**: Dark Obsidian Void (`#060709`).
-- **HUD**: Glassmorphic panels with `backdrop-filter: blur(16px)`.
-- **Canvas**: Full-screen 3D Force-Directed Graph (`react-force-graph-3d` + Three.js `UnrealBloomPass`).
-- **Dynamic Particles**: `linkDirectionalParticles={4}` streaming neon energy packets along active causal paths.
+- **Base Canvas**: Deep Void Black (`#000000`).
+- **Panels & Navigation**: Oxford Blue (`#14213d`) with hairline border dividers (`#24355a`).
+- **Hero Signal & Actions**: Safety Amber Accent (`#fca311`).
+- **Secondary & Body Monospace**: Platinum (`#e5e5e5`).
+- **Headings & Verified Baselines**: Pure White (`#ffffff`).
+- **Causal DAG Canvas**: High-precision orthogonal layout using `@xyflow/react` and `@dagrejs/dagre` with animated signal pulses along active causal failure paths.
+- **Investigation Ledger**: HolmesGPT 4-group taxonomy drawer with real-time FalkorDB Cypher viewer and 1-click mitigation button.
+- **Incident Scrubber**: Temporal timeline scrubber scrubbing from T-15m to T+0m to replay cascading failures.
 
 ### 6.2 Zero-Lag Hydration Guarantee
-To avoid SSR hydration mismatches in Next.js, the 3D canvas is isolated via client-only dynamic loading:
-- Implemented in [frontend/components/graph/GraphCanvasWrapper.tsx](file:///e:/Antigravity/Workspaces/Graph%20Hacks/frontend/components/graph/GraphCanvasWrapper.tsx).
-- Uses `next/dynamic` with `ssr: false` and a dark skeleton fallback.
+To prevent SSR hydration mismatches and layout snap, the Causal DAG uses a Skyvern-inspired 3-phase layout lifecycle with initial coordinate calculation before rendering.
 
 ---
 

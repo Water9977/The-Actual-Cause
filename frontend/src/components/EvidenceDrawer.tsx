@@ -42,44 +42,44 @@ export function EvidenceDrawer({
   };
 
   return (
-    <aside className="w-[420px] h-full border-l border-zinc-800/80 bg-zinc-950/95 backdrop-blur-md flex flex-col text-xs select-none overflow-hidden z-30">
+    <aside className="w-[420px] h-full border-l border-[#293548] bg-[#111827]/95 backdrop-blur-md flex flex-col text-xs select-none overflow-hidden z-30">
       {/* Drawer Header */}
-      <div className="h-12 border-b border-zinc-800/80 px-4 flex items-center justify-between">
+      <div className="h-12 border-b border-[#293548] px-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Icon icon="ph:terminal-window-light" className="w-4 h-4 text-zinc-400" />
-          <span className="font-mono font-medium uppercase tracking-wider text-zinc-200 text-[11px]">
+          <Icon icon="solar:document-text-bold-duotone" className="w-4 h-4 text-[#38bdf8]" />
+          <span className="font-mono font-medium uppercase tracking-wider text-slate-100 text-[11px]">
             Investigation Ledger
           </span>
         </div>
-        <span className="font-mono text-[10px] text-zinc-500">HolmesGPT Taxonomy</span>
+        <span className="font-mono text-[10px] text-slate-400">HolmesGPT Taxonomy</span>
       </div>
 
       {/* Main Drawer Scroll Area */}
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {/* Selected Node Inspector (If Clicked) */}
         {nodeData ? (
-          <div className="rounded border border-zinc-800 bg-zinc-900/60 p-3 space-y-2">
+          <div className="rounded border border-[#293548] bg-[#161f30] p-3 space-y-2">
             <div className="flex items-center justify-between">
-              <span className="font-mono text-[10px] text-zinc-400 uppercase tracking-wider flex items-center gap-1.5">
-                <Icon icon="ph:crosshair-light" className="w-3 h-3 text-zinc-500" />
+              <span className="font-mono text-[10px] text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+                <Icon icon="solar:target-bold-duotone" className="w-3.5 h-3.5 text-[#38bdf8]" />
                 <span>Inspected Node</span>
               </span>
-              <span className="font-mono text-[10px] text-zinc-500">{nodeData.timestamp}</span>
+              <span className="font-mono text-[10px] text-slate-500">{nodeData.timestamp}</span>
             </div>
-            <div className="font-medium text-zinc-100 text-[13px]">{nodeData.label}</div>
-            <div className="font-mono text-[11px] text-zinc-300 bg-zinc-950/90 p-2 rounded border border-zinc-800/80">
+            <div className="font-medium text-white text-[13px]">{nodeData.label}</div>
+            <div className="font-mono text-[11px] text-slate-300 bg-[#0b0f17] p-2 rounded border border-[#293548]">
               {nodeData.details || nodeData.subtext}
             </div>
             {nodeData.author && (
-              <div className="text-[11px] text-zinc-400 flex items-center gap-1">
+              <div className="text-[11px] text-slate-400 flex items-center gap-1">
                 <span>Author:</span>
-                <span className="text-zinc-200 font-mono">{nodeData.author}</span>
+                <span className="text-slate-200 font-mono">{nodeData.author}</span>
               </div>
             )}
           </div>
         ) : (
-          <div className="rounded border border-dashed border-zinc-800/80 p-2.5 text-center text-zinc-500 text-[11px] flex items-center justify-center gap-1.5">
-            <Icon icon="ph:cursor-click-light" className="w-3.5 h-3.5 text-zinc-600" />
+          <div className="rounded border border-dashed border-[#293548] p-3 text-center text-slate-400 text-[11px] flex items-center justify-center gap-1.5 bg-[#161f30]/40">
+            <Icon icon="solar:cursor-bold-duotone" className="w-3.5 h-3.5 text-[#38bdf8]" />
             <span>Click any node in Causal DAG to inspect graph properties.</span>
           </div>
         )}
@@ -88,18 +88,18 @@ export function EvidenceDrawer({
         <div className="space-y-3.5">
           {/* 1. Affected */}
           <div>
-            <div className="flex items-center gap-1.5 text-red-400 font-mono text-[11px] font-semibold mb-1.5">
-              <Icon icon="ph:shield-warning-light" className="w-3.5 h-3.5" />
+            <div className="flex items-center gap-1.5 text-[#f43f5e] font-mono text-[11px] font-semibold mb-1.5">
+              <Icon icon="solar:danger-triangle-bold-duotone" className="w-3.5 h-3.5" />
               <span>Affected Components ({evidence.affected.length})</span>
             </div>
             <div className="space-y-1">
               {evidence.affected.map((item) => (
                 <div
                   key={item.name}
-                  className="p-2 rounded bg-red-950/15 border border-red-900/40 text-[11px]"
+                  className="p-2 rounded bg-[#161f30] border border-[#f43f5e]/30 text-[11px]"
                 >
-                  <div className="font-medium text-red-300">{item.name}</div>
-                  <div className="font-mono text-zinc-400 text-[10px] mt-0.5">{item.symptom}</div>
+                  <div className="font-medium text-[#f43f5e]">{item.name}</div>
+                  <div className="font-mono text-slate-300 text-[10px] mt-0.5">{item.symptom}</div>
                 </div>
               ))}
             </div>
@@ -107,18 +107,18 @@ export function EvidenceDrawer({
 
           {/* 2. Checked, Healthy */}
           <div>
-            <div className="flex items-center gap-1.5 text-emerald-400 font-mono text-[11px] font-semibold mb-1.5">
-              <Icon icon="ph:check-circle-light" className="w-3.5 h-3.5" />
+            <div className="flex items-center gap-1.5 text-[#10b981] font-mono text-[11px] font-semibold mb-1.5">
+              <Icon icon="solar:check-circle-bold-duotone" className="w-3.5 h-3.5" />
               <span>Checked, Healthy Baselines ({evidence.healthy.length})</span>
             </div>
             <div className="space-y-1">
               {evidence.healthy.map((item) => (
                 <div
                   key={item.name}
-                  className="p-2 rounded bg-emerald-950/15 border border-emerald-900/40 text-[11px]"
+                  className="p-2 rounded bg-[#161f30] border border-[#10b981]/30 text-[11px]"
                 >
-                  <div className="font-medium text-emerald-300">{item.name}</div>
-                  <div className="font-mono text-zinc-400 text-[10px] mt-0.5">{item.metric}</div>
+                  <div className="font-medium text-[#10b981]">{item.name}</div>
+                  <div className="font-mono text-slate-300 text-[10px] mt-0.5">{item.metric}</div>
                 </div>
               ))}
             </div>
@@ -126,18 +126,18 @@ export function EvidenceDrawer({
 
           {/* 3. Changed Elsewhere */}
           <div>
-            <div className="flex items-center gap-1.5 text-amber-400 font-mono text-[11px] font-semibold mb-1.5">
-              <Icon icon="ph:git-diff-light" className="w-3.5 h-3.5" />
+            <div className="flex items-center gap-1.5 text-[#fbbf24] font-mono text-[11px] font-semibold mb-1.5">
+              <Icon icon="solar:git-branch-bold-duotone" className="w-3.5 h-3.5" />
               <span>Changed Elsewhere ({evidence.changed_elsewhere.length})</span>
             </div>
             <div className="space-y-1">
               {evidence.changed_elsewhere.map((item) => (
                 <div
                   key={item.name}
-                  className="p-2 rounded bg-amber-950/15 border border-amber-900/40 text-[11px]"
+                  className="p-2 rounded bg-[#161f30] border border-[#fbbf24]/30 text-[11px]"
                 >
-                  <div className="font-medium text-amber-300">{item.name}</div>
-                  <div className="font-mono text-zinc-400 text-[10px] mt-0.5">{item.detail}</div>
+                  <div className="font-medium text-[#fbbf24]">{item.name}</div>
+                  <div className="font-mono text-slate-300 text-[10px] mt-0.5">{item.detail}</div>
                 </div>
               ))}
             </div>
@@ -145,18 +145,18 @@ export function EvidenceDrawer({
 
           {/* 4. Not Checked */}
           <div>
-            <div className="flex items-center gap-1.5 text-zinc-400 font-mono text-[11px] font-semibold mb-1.5">
-              <Icon icon="ph:question-light" className="w-3.5 h-3.5 text-zinc-500" />
+            <div className="flex items-center gap-1.5 text-slate-400 font-mono text-[11px] font-semibold mb-1.5">
+              <Icon icon="solar:question-circle-bold-duotone" className="w-3.5 h-3.5" />
               <span>Not Checked ({evidence.not_checked.length})</span>
             </div>
             <div className="space-y-1">
               {evidence.not_checked.map((item) => (
                 <div
                   key={item.name}
-                  className="p-2 rounded bg-zinc-900/40 border border-zinc-800 text-[11px]"
+                  className="p-2 rounded bg-[#161f30]/60 border border-[#293548] text-[11px]"
                 >
-                  <div className="font-medium text-zinc-300">{item.name}</div>
-                  <div className="font-mono text-zinc-500 text-[10px] mt-0.5">{item.reason}</div>
+                  <div className="font-medium text-slate-300">{item.name}</div>
+                  <div className="font-mono text-slate-400 text-[10px] mt-0.5">{item.reason}</div>
                 </div>
               ))}
             </div>
@@ -164,59 +164,59 @@ export function EvidenceDrawer({
         </div>
 
         {/* FalkorDB Live Cypher Traversal Panel */}
-        <div className="border-t border-zinc-800/80 pt-3.5 space-y-2">
+        <div className="border-t border-[#293548] pt-3.5 space-y-2">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-1.5 text-zinc-300 font-mono text-[11px] font-medium">
-              <Icon icon="ph:code-light" className="w-3.5 h-3.5 text-zinc-400" />
+            <div className="flex items-center gap-1.5 text-slate-200 font-mono text-[11px] font-medium">
+              <Icon icon="solar:code-bold-duotone" className="w-3.5 h-3.5 text-[#38bdf8]" />
               <span>FalkorDB Traversal Cypher</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="font-mono text-[10px] text-emerald-400">
+              <span className="font-mono text-[10px] text-[#38bdf8]">
                 {cypherLatencyMs.toFixed(2)}ms
               </span>
               <button
                 onClick={handleCopyCypher}
-                className="text-zinc-500 hover:text-zinc-300 p-0.5 rounded transition-colors"
+                className="text-slate-400 hover:text-white p-0.5 rounded transition-colors"
                 title="Copy Cypher query"
               >
-                <Icon icon={copied ? "ph:check-bold" : "ph:copy-light"} className="w-3 h-3" />
+                <Icon icon={copied ? "solar:check-circle-bold" : "solar:copy-bold"} className="w-3 h-3 text-[#38bdf8]" />
               </button>
             </div>
           </div>
-          <pre className="p-2.5 rounded bg-zinc-900/90 border border-zinc-800 font-mono text-[10px] text-zinc-300 overflow-x-auto whitespace-pre-wrap leading-relaxed select-text">
+          <pre className="p-2.5 rounded bg-[#0b0f17] border border-[#293548] font-mono text-[10px] text-[#38bdf8] overflow-x-auto whitespace-pre-wrap leading-relaxed select-text">
             {cypherQuery}
           </pre>
         </div>
       </div>
 
       {/* 1-Click Remediation Action Footer */}
-      <div className="p-3 border-t border-zinc-800/80 bg-zinc-950 relative">
+      <div className="p-3 border-t border-[#293548] bg-[#111827] relative">
         <button
           onClick={onExecuteRemediation}
           disabled={isRemediating || remediationSuccess}
           className={`relative overflow-hidden w-full py-2.5 px-3 rounded font-mono text-xs font-semibold flex items-center justify-center gap-2 transition-all ${
             remediationSuccess
-              ? "bg-emerald-950/80 text-emerald-300 border border-emerald-800 cursor-default"
+              ? "bg-[#10b981]/20 text-[#10b981] border border-[#10b981]/40 cursor-default"
               : isRemediating
-              ? "bg-zinc-800 text-zinc-400 cursor-wait"
-              : "bg-red-600 hover:bg-red-500 text-white shadow-sm shadow-red-950/40 cursor-pointer"
+              ? "bg-[#1e293b] text-slate-400 cursor-wait"
+              : "bg-gradient-to-r from-sky-600 to-cyan-600 hover:from-sky-500 hover:to-cyan-500 text-white font-semibold border border-sky-400/40 shadow-lg shadow-sky-950/40 cursor-pointer"
           }`}
         >
           {remediationSuccess ? (
             <>
-              <Icon icon="ph:check-circle-light" className="w-4 h-4 text-emerald-400" />
+              <Icon icon="solar:check-circle-bold" className="w-4 h-4 text-[#10b981]" />
               <span>MITIGATED & MEMORY CRYSTALLIZED</span>
             </>
           ) : isRemediating ? (
             <>
-              <Icon icon="ph:spinner-gap-light" className="w-3.5 h-3.5 text-zinc-300 animate-spin" />
+              <Icon icon="solar:restart-bold" className="w-3.5 h-3.5 text-white animate-spin" />
               <span>EXECUTING REMEDIATION...</span>
             </>
           ) : (
             <>
-              <Icon icon="ph:lightning-light" className="w-4 h-4" />
+              <Icon icon="solar:bolt-bold-duotone" className="w-4 h-4 text-white" />
               <span>REMEDIATE: REVERT TO ALLKEYS-LRU</span>
-              <BorderBeam size={50} duration={3} colorFrom="#ffffff" colorTo="#f59e0b" />
+              <BorderBeam size={50} duration={3} colorFrom="#38bdf8" colorTo="#06b6d4" />
             </>
           )}
         </button>
