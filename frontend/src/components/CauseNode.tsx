@@ -68,7 +68,7 @@ export function CauseNode({ data, selected }: { data: CauseNodeData; selected?: 
       <Handle
         type="target"
         position={Position.Left}
-        className={`!w-2 !h-2 ${isRootCause ? "!bg-[#f43f5e]" : "!bg-[#38bdf8]"} !border !border-[#0b0f17] !rounded-full`}
+        className={`!w-2 !h-2 ${isRootCause ? "!bg-[#f43f5e]" : "!bg-[#38bdf8]"} !border !border-black !rounded-full`}
       />
 
       {/* Top Header Row */}
@@ -112,7 +112,7 @@ export function CauseNode({ data, selected }: { data: CauseNodeData; selected?: 
       <Handle
         type="source"
         position={Position.Right}
-        className={`!w-2 !h-2 ${isRootCause ? "!bg-[#f43f5e]" : "!bg-[#38bdf8]"} !border !border-[#0b0f17] !rounded-full`}
+        className={`!w-2 !h-2 ${isRootCause ? "!bg-[#f43f5e]" : "!bg-[#38bdf8]"} !border !border-black !rounded-full`}
       />
     </div>
   );

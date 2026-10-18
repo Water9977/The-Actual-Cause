@@ -115,7 +115,7 @@ export function Header({
         >
           <Icon icon="solar:magnifer-bold" className="w-3.5 h-3.5 text-[#38bdf8]" />
           <span className="font-sans text-[11px]">Command Palette</span>
-          <kbd className="font-mono text-[10px] bg-[#0b0f17] border border-[#293548] px-1 py-0.5 rounded text-slate-400 flex items-center gap-0.5">
+          <kbd className="font-mono text-[10px] bg-[#000000] border border-[#293548] px-1 py-0.5 rounded text-slate-400 flex items-center gap-0.5">
             <Icon icon="solar:command-bold" className="w-2.5 h-2.5" />
             <span>K</span>
           </kbd>

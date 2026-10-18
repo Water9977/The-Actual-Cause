@@ -67,7 +67,7 @@ export function EvidenceDrawer({
               <span className="font-mono text-[10px] text-slate-500">{nodeData.timestamp}</span>
             </div>
             <div className="font-medium text-white text-[13px]">{nodeData.label}</div>
-            <div className="font-mono text-[11px] text-slate-300 bg-[#0b0f17] p-2 rounded border border-[#293548]">
+            <div className="font-mono text-[11px] text-slate-300 bg-[#000000] p-2 rounded border border-[#293548]">
               {nodeData.details || nodeData.subtext}
             </div>
             {nodeData.author && (
@@ -183,7 +183,7 @@ export function EvidenceDrawer({
               </button>
             </div>
           </div>
-          <pre className="p-2.5 rounded bg-[#0b0f17] border border-[#293548] font-mono text-[10px] text-[#38bdf8] overflow-x-auto whitespace-pre-wrap leading-relaxed select-text">
+          <pre className="p-2.5 rounded bg-[#000000] border border-[#293548] font-mono text-[10px] text-[#38bdf8] overflow-x-auto whitespace-pre-wrap leading-relaxed select-text">
             {cypherQuery}
           </pre>
         </div>

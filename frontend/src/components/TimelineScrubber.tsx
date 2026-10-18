@@ -82,7 +82,7 @@ export function TimelineScrubber({ progress, onChange }: TimelineScrubberProps) 
             setIsPlaying(false);
             onChange(parseFloat(e.target.value));
           }}
-          className="w-full h-1.5 bg-[#0b0f17] border border-[#293548] rounded-lg appearance-none cursor-pointer accent-[#38bdf8] focus:outline-none"
+          className="w-full h-1.5 bg-[#000000] border border-[#293548] rounded-lg appearance-none cursor-pointer accent-[#38bdf8] focus:outline-none"
         />
 
         {/* Milestone Marks */}

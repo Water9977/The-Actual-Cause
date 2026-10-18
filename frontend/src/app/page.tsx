@@ -369,7 +369,7 @@ export default function IncidentConsole() {
   );
 
   return (
-    <div className="flex flex-col h-screen w-screen bg-[#0b0f17] text-slate-100 overflow-hidden font-sans">
+    <div className="flex flex-col h-screen w-screen bg-[#000000] text-slate-100 overflow-hidden font-sans">
       {/* 1. SRE Top Header */}
       <Header
         incidentId={data.incident_id}

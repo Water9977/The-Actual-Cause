@@ -42,7 +42,7 @@ export function CommandPalette({
               placeholder="Type an investigation command, query, or service..."
               className="w-full h-11 bg-transparent text-white placeholder-slate-400 text-xs focus:outline-none font-mono"
             />
-            <kbd className="font-mono text-[9px] bg-[#0b0f17] border border-[#293548] px-1.5 py-0.5 rounded text-slate-400">
+            <kbd className="font-mono text-[9px] bg-[#000000] border border-[#293548] px-1.5 py-0.5 rounded text-slate-400">
               ESC
             </kbd>
           </div>

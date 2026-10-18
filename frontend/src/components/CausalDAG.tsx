@@ -11,7 +11,6 @@ import {
 } from "@xyflow/react";
 import dagre from "@dagrejs/dagre";
 import { CauseNode } from "./CauseNode";
-import { AnimatedGridPattern } from "@/components/ui/animated-grid-pattern";
 import { Icon } from "@iconify/react";
 import "@xyflow/react/dist/style.css";
 
@@ -122,16 +121,7 @@ export function CausalDAG({
   }, [onSelectNode]);
 
   return (
-    <div className="w-full h-full relative bg-[#0b0f17] overflow-hidden select-none">
-      {/* Background Animated Technical Grid */}
-      <AnimatedGridPattern
-        width={36}
-        height={36}
-        numSquares={20}
-        maxOpacity={0.15}
-        className="opacity-50"
-      />
-
+    <div className="w-full h-full relative bg-[#000000] overflow-hidden select-none">
       <div
         className={`w-full h-full transition-opacity duration-300 relative z-10 ${
           layoutReady ? "opacity-100" : "opacity-0"
