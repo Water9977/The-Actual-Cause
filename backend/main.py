@@ -1,4 +1,5 @@
 import asyncio
+import time
 import logging
 from typing import List, Dict, Any, Optional
 from contextlib import asynccontextmanager
@@ -446,14 +447,17 @@ async def execute_remediation(req: RemediationRequest):
         CREATE (inc:IncidentRecord {
             id: $inc_id,
             title: 'RFC-308 Redis MaxMemory Eviction Exhaustion',
-            mitigated_at: datetime().epochMillis,
+            mitigated_at: $now_ms,
             resolution: 'CONFIG SET maxmemory-policy allkeys-lru'
         })
         CREATE (inc)-[:PREVIOUSLY_FAILED_BY]->(c)
         CREATE (inc)-[:TARGETED_SUBSYSTEM]->(s)
         RETURN inc.id;
         """
-        CypherRunner.execute_query(crystal_cypher, params={"inc_id": req.incident_id})
+        CypherRunner.execute_query(
+            crystal_cypher,
+            params={"inc_id": req.incident_id, "now_ms": int(time.time() * 1000)}
+        )
 
         # Step 3: Broadcast completion
         await manager.broadcast({
