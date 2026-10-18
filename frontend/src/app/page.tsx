@@ -9,8 +9,15 @@ import { EvidenceDrawer } from "@/components/EvidenceDrawer";
 import { CommandPalette } from "@/components/CommandPalette";
 import { Icon } from "@iconify/react";
 
-const API_BASE = "http://localhost:8000";
-const WS_BASE = "ws://localhost:8000";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL !== undefined
+  ? process.env.NEXT_PUBLIC_API_URL
+  : (typeof window !== "undefined" && window.location.hostname !== "localhost" ? "" : "http://localhost:8000");
+
+const WS_BASE = process.env.NEXT_PUBLIC_WS_URL !== undefined
+  ? process.env.NEXT_PUBLIC_WS_URL
+  : (typeof window !== "undefined" && window.location.hostname !== "localhost"
+      ? `${window.location.protocol === "https:" ? "wss:" : "ws:"}//${window.location.host}`
+      : "ws://localhost:8000");
 
 // Fallback deterministic data for immediate rendering & resilience
 const FALLBACK_INCIDENT = {
